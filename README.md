@@ -22,6 +22,8 @@ A browser runner directed in chat and built with **Grok Bot**. This `public` bra
 ![Vite](https://img.shields.io/badge/Vite-646cff?logo=vite&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-assets-e87d0d?logo=blender&logoColor=white)
 
+![Scrappy Yard gameplay: the raccoon running the scrapyard lane, the junk mech chasing, pickups, and playable animal skins](.github/assets/scrappy-yard.gif)
+
 </div>
 
 ---
