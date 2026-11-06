@@ -1,0 +1,6 @@
+# Pinned to the toolchain the starter was verified with (see docs/starter.md).
+# rustup installs it (and the wasm target) on first use in this directory.
+[toolchain]
+channel = "1.93.1"
+targets = ["wasm32-unknown-unknown"]
+profile = "minimal"

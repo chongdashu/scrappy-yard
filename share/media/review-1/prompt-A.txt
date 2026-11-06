@@ -1,0 +1,13 @@
+A single image showing two in-game screenshots of the same moment from a 3D cartoon runner video game, placed side by side on a plain dark grey background: on the left a tall portrait smartphone screen (9:19.5), on the right a widescreen 16:9 desktop monitor screen. This is real gameplay captured from the game, not box art or concept art.
+
+Setting: tropical jungle ruins. A worn stone path through lush palm jungle, mossy temple blocks, vines, wooden crates, bright turquoise sky, warm afternoon sun.
+
+Camera: oncoming third-person view. The camera sits ahead of the hero and looks back at them, so the hero sprints TOWARD the viewer and the path streams past the camera. The hero is a small, chunky, cartoony orange fox-like critter with big sneakers, clearly readable in the lower-middle foreground, mid-stride, centred in one of three lanes.
+
+Far behind the hero, in the deep background at the end of the path, a huge friendly-looking round cartoon mech with glowing eyes stomps after the hero, knocking over palm trees. It chases the hero from behind; it is not fighting or shooting at the hero, and the hero is fleeing it.
+
+In the mid-ground between hero and camera: a rolling stone log hazard blocking one lane and a small gap in the path the hero must jump. Bright floating red apples line the free lane as collectibles. A carved stone finish arch with a checkered banner is visible near the camera edge of the path, signalling the end of the course.
+
+HUD: small clean top-left distance-to-finish bar and timer, top-right apple counter icon with a number. Portrait phone screen only: a translucent virtual joystick bottom-left and one round JUMP button bottom-right. Desktop screen: same HUD with no touch controls at all, just a tiny "Space: Jump" hint.
+
+Art style: low-poly 3D with flat colours and soft toon shading, simple chunky shapes, clean readable silhouettes, like a stylised indie game rendered in real time. Uncluttered scene, few props. Whimsical, comedic, family-friendly. No gore, no horror, no violence, no weapons, no text other than the HUD, no delivery or courier themes.

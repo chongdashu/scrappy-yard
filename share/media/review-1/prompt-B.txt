@@ -1,0 +1,13 @@
+Two gameplay screenshots of the same instant in a cheerful 3D runner game, shown next to each other on a neutral dark background: left is a vertical phone screen in portrait orientation, right is a wide 16:9 desktop screen. They must look like actual in-game captures with a HUD, not a poster or illustration.
+
+Setting: a crystal canyon full of gem caves. Lavender and teal rock walls, giant glowing pink and cyan crystals growing from the cliffs, a winding smooth stone track along the canyon floor, a soft purple twilight sky with a few stars.
+
+Camera and action: the camera looks back at the player character from in front, so the character runs straight toward the viewer while the canyon slides past. The player is a small round cartoon purple dragon-ish lizard kid with tiny wings, readable in the lower middle of each frame, leaning forward mid-run in the centre of three lanes.
+
+Deep in the background, behind the player and far down the canyon, a towering cartoony mech with a dome head and big claws strides after them, crystals cracking around its feet. The mech pursues the player from behind; the player is escaping, nobody is attacking.
+
+Mid-ground obstacles: a cluster of sharp crystal spikes blocking the left lane, and a glowing gap in the track ahead of the player. Collectibles: a line of sparkling faceted gems floating over the right lane. Finish: a big crystal gateway with a glowing finish banner near the foreground edge, marking the end of the run.
+
+HUD: minimal — a slim progress-to-finish bar and timer at the top left, a gem icon with count at the top right. On the phone screen only, a semi-transparent virtual thumbstick lower left and a single jump button lower right. On the desktop screen no on-screen touch controls, only a small keyboard hint.
+
+Look: low-poly game art, flat colour fills with toon shading, simple geometric crystals, bold readable shapes that a Blender low-poly model could match. Keep it clean and uncluttered. Playful, family-friendly, no gore, no horror, no weapons, no delivery or courier themes.

@@ -1,0 +1,50 @@
+{
+  "name": "vgd-wasm-game-starter",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Runnable starter: a game-neutral engine (Rust/WASM simulation, direct WebGPU and WebGL 2 renderers, Vite) with a blank game in game/ and optional add-ons such as the Starter Arena demo.",
+  "engines": {
+    "node": ">=22.4"
+  },
+  "scripts": {
+    "wasm": "node scripts/build-wasm.mjs",
+    "dev": "npm run wasm && vite",
+    "dev:https": "npm run wasm && vite --mode https",
+    "build": "npm run wasm && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "cargo test --workspace",
+    "test:game": "npm run wasm && vitest run",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node tests/smoke.mjs",
+    "test:graphics": "node tests/graphics.mjs",
+    "package:web": "node scripts/package-web.mjs",
+    "package:wavedash": "node scripts/package-wavedash.mjs",
+    "package:crazygames": "node scripts/package-crazygames.mjs",
+    "serve:release": "node scripts/serve-release.mjs",
+    "deploy:web": "node scripts/deploy-vercel.mjs",
+    "wavedash:push": "node scripts/wavedash-push.mjs",
+    "wavedash:publish": "node scripts/wavedash-publish.mjs",
+    "test:release": "node --test \"tests/release/*.test.mjs\"",
+    "assets": "node scripts/game-command.mjs assets",
+    "verify:assets": "node scripts/game-command.mjs verifyAssets",
+    "game": "node scripts/game-command.mjs",
+    "test:frontend": "npm run wasm && node tests/frontend.mjs",
+    "test:mobile-view": "npm run wasm && node tests/mobile-view.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.2",
+    "@vitejs/plugin-basic-ssl": "2.3.0",
+    "@webgpu/types": "0.1.74",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  },
+  "dependencies": {
+    "@auth/core": "^0.41.3",
+    "@convex-dev/auth": "^0.0.96",
+    "convex": "^1.49.0",
+    "dodopayments": "^2.61.1",
+    "jose": "^6.2.15"
+  }
+}

@@ -1,0 +1,27 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    .p-word { position: absolute; font-family: "Archivo Black", sans-serif; text-transform: uppercase; line-height: 0.9;
+      color: #fff; text-shadow: 8px 8px 0 #16110F; white-space: nowrap; }
+    #p-dont { left: 120px; top: 140px; font-size: 130px; }
+    #p-get { left: 120px; top: 270px; font-size: 130px; }
+    #p-caught { left: 120px; top: 395px; font-size: 200px; color: #FFB000; }
+    #p-sub { position: absolute; left: 160px; top: 110px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 44px;
+      letter-spacing: 0.04em; text-transform: uppercase; color: #fff; text-shadow: 4px 4px 0 #16110F; }
+  </style>
+  <div id="root" data-composition-id="pressure" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="p-sub" class="clip" data-start="0.4" data-duration="2.4" data-track-index="1">The junk mech never stops</div>
+    <div id="p-dont" class="p-word clip" data-start="3.2" data-duration="3.2" data-track-index="2">Don't</div>
+    <div id="p-get" class="p-word clip" data-start="3.6" data-duration="2.8" data-track-index="3">get</div>
+    <div id="p-caught" class="p-word clip" data-start="4.0" data-duration="2.4" data-track-index="4">Caught</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const slam = (sel, at, s = 1.35) => tl.fromTo(sel, { scale: s, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out", transformOrigin: "0% 0%" }, at);
+    tl.fromTo("#p-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.4);
+    tl.to("#p-sub", { opacity: 0, filter: "blur(8px)", duration: 0.14, ease: "power3.in" }, 2.62);
+    slam("#p-dont", 3.2); slam("#p-get", 3.6); slam("#p-caught", 4.0, 1.6);
+    tl.to(["#p-dont", "#p-get", "#p-caught"], { opacity: 0, filter: "blur(8px)", duration: 0.14, ease: "power3.in" }, 6.22);
+    window.__timelines["pressure"] = tl;
+  </script>
+</template>

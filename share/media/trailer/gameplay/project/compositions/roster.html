@@ -1,0 +1,25 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #r-label { position: absolute; left: 120px; top: 96px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 44px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: #fff; text-shadow: 4px 4px 0 #16110F; }
+    #r-title { position: absolute; left: 110px; top: 150px; font-family: "Archivo Black", sans-serif; text-transform: uppercase;
+      font-size: 118px; line-height: 0.9; color: #FFB000; text-shadow: 8px 8px 0 #16110F; white-space: nowrap; }
+    #r-names { position: absolute; left: 120px; bottom: 110px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 36px;
+      letter-spacing: 0.04em; text-transform: uppercase; color: #fff; text-shadow: 3px 3px 0 #16110F; }
+  </style>
+  <div id="root" data-composition-id="roster" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="r-label" class="clip" data-start="0.05" data-duration="3.1" data-track-index="1">Six runners. One yard.</div>
+    <div id="r-title" class="clip" data-start="0.2" data-duration="2.95" data-track-index="2">Pick your scrapper</div>
+    <div id="r-names" class="clip" data-start="0.45" data-duration="2.7" data-track-index="3">Raccoon · Fox · Cat · Badger · Possum · Otter</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const slam = (sel, at, s = 1.3) => tl.fromTo(sel, { scale: s, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "expo.out", transformOrigin: "0% 50%" }, at);
+    slam("#r-label", 0.05, 1.15);
+    slam("#r-title", 0.2, 1.4);
+    tl.fromTo("#r-names", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.45);
+    tl.to(["#r-label", "#r-title", "#r-names"], { opacity: 0, filter: "blur(8px)", duration: 0.12, ease: "power3.in" }, 3.05);
+    window.__timelines["roster"] = tl;
+  </script>
+</template>

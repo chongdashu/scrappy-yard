@@ -1,0 +1,6 @@
+# Copy to wavedash.toml. `wavedash project create` prints the game_id; `npm run
+# package:wavedash` fills upload_dir; `npm run wavedash:push` uploads it (unpublished);
+# `npm run wavedash:publish -- <BUILD_ID>` makes a reviewed build live.
+game_id = "REPLACE_WITH_WAVEDASH_GAME_ID"
+upload_dir = "./release/wavedash"
+entrypoint = "index.html"

@@ -1,0 +1,74 @@
+{
+ "sfx_ui_hover": {
+  "prompt": "Short tight mechanical metal latch tick, industrial UI hover, crisp",
+  "duration": 0.5
+ },
+ "sfx_ui_click": {
+  "prompt": "Chunky heavy industrial button press, thick steel lever clunk with pneumatic hiss, UI confirm",
+  "duration": 0.6
+ },
+ "sfx_ui_back": {
+  "prompt": "Short industrial UI cancel, heavy metal latch releasing with low clunk, descending",
+  "duration": 0.6
+ },
+ "sfx_ui_start": {
+  "prompt": "Powerful engine rev and heavy steel gate slam, junkyard game start, punchy industrial",
+  "duration": 1.4
+ },
+ "sfx_jump": {
+  "prompt": "Cartoon springy jump boing, short and bouncy",
+  "duration": 0.5
+ },
+ "sfx_land": {
+  "prompt": "Small cartoon character landing thud on dirt and scrap metal",
+  "duration": 0.5
+ },
+ "sfx_pickup": {
+  "prompt": "Bright cartoon collectible pickup, metal nut clink with sparkle chime",
+  "duration": 0.5
+ },
+ "sfx_strafe": {
+  "prompt": "Subtle quick air whoosh swish sidestep",
+  "duration": 0.5
+ },
+ "sfx_hit": {
+  "prompt": "Hard heavy scrap metal car crash impact, crunching steel collision smash with debris rattle, realistic, no cartoon",
+  "duration": 1.0
+ },
+ "sfx_fall": {
+  "prompt": "Cartoon falling whistle descending into a pit",
+  "duration": 1.5
+ },
+ "sfx_gameover": {
+  "prompt": "Short dark industrial fail sting, deep metal slam and grinding machinery winding down to silence, ominous, no trombone, no cartoon",
+  "duration": 2.2
+ },
+ "sfx_danger": {
+  "prompt": "Short tense warning sting, alarm stab for near miss danger",
+  "duration": 0.8
+ },
+ "sfx_stomp": {
+  "prompt": "Heavy giant robot mech footstep stomp, metallic thud with hydraulic hiss",
+  "duration": 0.8
+ },
+ "sfx_win": {
+  "prompt": "Triumphant cartoon victory finish chime fanfare, short",
+  "duration": 2.0
+ },
+ "sfx_retry": {
+  "prompt": "Quick cartoon rewind click restart sound",
+  "duration": 0.6
+ },
+ "bgm_menu": {
+  "prompt": "Instrumental junkyard adventure main menu theme for an action runner game, 110 BPM, gritty overdriven bass riff, heavy industrial metal percussion with anvil hits and clanking scrap, distorted synth stabs and bold brass, confident and tense, building anticipation, loopable, no vocals",
+  "duration": 55
+ },
+ "bgm_play": {
+  "prompt": "Instrumental high-energy cartoon chase music, 150 BPM, industrial junkyard percussion with clanging metal, driving bass, brass stabs, building pressure, a giant robot is chasing, loopable, no vocals",
+  "duration": 85.0
+ },
+ "bgm_process_tech": {
+  "prompt": "Instrumental technical making-of underscore for a junkyard game process trailer, 120 BPM, industrial ambient techno, metallic scrap percussion ticks and anvil hits, deep pulsing synth bass, subtle hydraulic hiss textures, glitchy digital beeps like a CAD workstation, focused and precise not playful, no melody hook that feels cartoon, no vocals, loopable",
+  "duration": 40.0
+ }
+}

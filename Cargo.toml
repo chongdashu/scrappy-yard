@@ -1,0 +1,24 @@
+[workspace]
+# crates/*          the engine (vgd-engine) and any shared engine crates
+# [ag]*/**/crate    every game crate: game/crate (your game) and
+#                   addons/<name>/crate (each add-on present).
+# One glob covers both on purpose. Cargo treats a glob that matches nothing as
+# a literal path and fails, so `addons/*/crate` on its own breaks every cargo
+# command once addons/ is deleted; this pattern always matches game/crate.
+# It only walks top-level folders starting with "a" or "g": don't create a
+# folder named `crate` without a Cargo.toml under them.
+members = ["crates/*", "[ag]*/**/crate"]
+resolver = "2"
+
+# Game crates depend on the engine as `vgd-engine = { workspace = true }`, so
+# the same Cargo.toml works in game/crate and addons/<name>/crate (copying an
+# add-on into game/ needs no path edits).
+[workspace.dependencies]
+vgd-engine = { path = "crates/engine" }
+
+# Small, fast wasm: no threads, no SharedArrayBuffer, no wasm-bindgen, no wasm-opt.
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

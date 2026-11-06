@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#120804" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- The title placeholders on this page become the active game's title (game.json) at build time. -->
+    <title>%GAME_TITLE%</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <style>
+      /* Critical boot styles: the loading screen is styled before JS/CSS arrive. */
+      html, body { margin: 0; height: 100%; background: #1b2033; overflow: hidden; }
+      #boot { position: fixed; inset: 0; background: linear-gradient(180deg, #2b3a5c, #1b2033); }
+      [hidden] { display: none !important; }
+      /* Scrappy Yard pre-JS loading plate (replaced by the body.sd skin once CSS/JS arrive) */
+      html, body { background: #120804; }
+      body:not(.sd) #boot { background: repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 14px), radial-gradient(90% 70% at 50% 40%, #5a2a14 0%, #2a140b 60%, #120804 100%); color: #fde68a; font-family: Impact, "Arial Black", "Helvetica Neue", sans-serif; }
+      body:not(.sd) #boot::before, body:not(.sd) #boot::after { content: ""; position: absolute; left: 0; right: 0; height: 16px; background: repeating-linear-gradient(-45deg, #facc15 0 18px, #111 18px 36px); }
+      body:not(.sd) #boot::before { top: 0; } body:not(.sd) #boot::after { bottom: 0; }
+      body:not(.sd) #boot .boot-col { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+      body:not(.sd) #boot .logo { margin: 0; font-size: clamp(40px, 9vw, 96px); font-style: italic; letter-spacing: 0.02em; text-transform: uppercase; color: #facc15; text-shadow: 0 4px 0 #7c2d12, 0 8px 18px rgb(0 0 0 / 0.6); }
+      body:not(.sd) #boot .tagline, body:not(.sd) #boot .boot-tip, body:not(.sd) #boot #press-start { display: none; }
+      body:not(.sd) #boot .bar { width: min(320px, 70vw); height: 14px; border: 3px solid #111; background: #2a140b; }
+      body:not(.sd) #boot #boot-fill { height: 100%; width: 0; background: repeating-linear-gradient(-45deg, #facc15 0 10px, #111 10px 20px); }
+      body:not(.sd) #boot .boot-label { margin: 0; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; color: #fde68a; }
+    </style>
+  </head>
+  <body data-phase="boot">
+    <canvas id="game" tabindex="-1" aria-label="Game view"></canvas>
+
+    <div id="pops" aria-hidden="true"></div>
+
+    <!-- In-round HUD. The game's markup (GameModule.hud) fills the two slots; data-cover marks
+         bands the camera keeps the focus out of. -->
+    <div id="hud" hidden>
+      <header id="hud-top" data-cover="top">
+        <div id="hud-game-top" class="hud-slot"></div>
+        <div class="hud-buttons">
+          <button id="btn-mute" class="icon-btn" aria-label="Mute (M)" title="Mute (M)">🔊</button>
+          <button id="btn-pause" class="icon-btn" aria-label="Pause (Esc)" title="Pause (Esc / P)">❚❚</button>
+        </div>
+      </header>
+      <div id="hud-game" class="hud-slot"></div>
+    </div>
+    <div id="countdown" aria-live="assertive" hidden></div>
+
+    <!-- Boot: loading → press to start (the audio unlock gesture) -->
+    <section id="boot" class="screen">
+      <div class="boot-col">
+        <h1 class="logo" data-game-title>%GAME_TITLE%</h1>
+        <p class="tagline" data-game-tagline></p>
+        <div id="boot-bar" class="bar" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="boot-fill"></div></div>
+        <p id="boot-label" class="boot-label">Loading…</p>
+        <button id="press-start" class="btn primary big" hidden><span>Click or press any key to start</span></button>
+        <p id="boot-tip" class="boot-tip"></p>
+      </div>
+    </section>
+
+    <!-- Main menu over the live scene -->
+    <section id="menu" class="screen" hidden>
+      <div class="menu-col">
+        <h1 class="logo" data-game-title>%GAME_TITLE%</h1>
+        <nav class="menu-list" aria-label="Main menu">
+          <button class="mbtn primary" data-act="play" data-stagger>Play</button>
+          <button class="mbtn" data-act="help" data-stagger>How to play</button>
+          <button class="mbtn" data-act="settings" data-stagger>Settings</button>
+        </nav>
+      </div>
+      <p class="menu-foot"><kbd>↑</kbd><kbd>↓</kbd> choose · <kbd>Enter</kbd> select</p>
+    </section>
+
+    <section id="help-pop" class="popup" hidden>
+      <div class="pcard" role="dialog" aria-modal="true" aria-labelledby="help-title">
+        <div class="ribbon" id="help-title">How to play</div>
+        <button class="pclose" data-close aria-label="Close">✕</button>
+        <!-- The game's help (GameModule.help); the engine's default lists pause and mute. -->
+        <div id="help-body"></div>
+        <div class="row-buttons"><button class="btn primary" data-close data-autofocus>Got it</button></div>
+      </div>
+    </section>
+
+    <section id="settings-pop" class="popup" hidden>
+      <div class="pcard" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="ribbon" id="settings-title">Settings</div>
+        <button class="pclose" data-close aria-label="Close">✕</button>
+        <label class="set-row"><span>Volume</span><input data-setting="volume" type="range" min="0" max="1" step="0.05" data-autofocus /></label>
+        <div class="set-row"><span>Sound</span><button class="toggle" data-setting="muted" aria-label="Sound on"></button></div>
+        <div class="set-row"><span>Shadows</span><button class="toggle" data-setting="shadows" aria-label="Shadows"></button></div>
+        <div class="set-row"><span>Outlines</span><button class="toggle" data-setting="outlines" aria-label="Ink outlines"></button></div>
+        <div class="set-row"><span>Reduced motion</span><button class="toggle" data-setting="reducedMotion" aria-label="Reduced motion"></button></div>
+        <div class="set-row" id="set-fullscreen-row" hidden><span>Fullscreen</span><button class="btn small" id="set-fullscreen">Toggle</button></div>
+        <p class="build-id" id="build-id" hidden></p>
+      </div>
+    </section>
+
+    <section id="pause-pop" class="popup" hidden>
+      <div class="pcard" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+        <div class="ribbon" id="pause-title">Paused</div>
+        <div class="row-buttons col">
+          <button id="pause-resume" class="btn primary" data-autofocus data-stagger>Resume</button>
+          <button id="pause-restart" class="btn" data-stagger>Restart round</button>
+          <button id="pause-settings" class="btn" data-stagger>Settings</button>
+          <button id="pause-help" class="btn" data-stagger>How to play</button>
+          <button id="pause-quit" class="btn" data-stagger>Quit to menu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results card shell; the game's summary() fills it when a round ends. -->
+    <section id="results-pop" class="popup" hidden>
+      <div class="pcard" role="dialog" aria-modal="true" aria-labelledby="results-title">
+        <div class="ribbon" id="results-ribbon">Round over</div>
+        <h2 id="results-title"></h2>
+        <div id="results-rows" class="rows"></div>
+        <p id="results-note" class="note" hidden></p>
+        <!-- The game's own line under the rows (RoundSummary.extra), when it gives one. -->
+        <div id="results-extra" hidden></div>
+        <!-- The game's own results markup (RoundSummary.custom), when it gives one. -->
+        <div id="results-custom" hidden></div>
+        <div class="row-buttons">
+          <button id="results-again" class="btn primary" data-autofocus>Play again</button>
+          <button id="results-menu" class="btn">Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="wipe" aria-hidden="true" hidden></div>
+
+    <section id="fatal" class="card-screen" hidden>
+      <div class="card" role="alert"><h2></h2><p></p></div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

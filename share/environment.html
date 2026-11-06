@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World + chase · Scrappy Yard build notes</title><style>
+:root{--bg:#14100e;--panel:#1e1815;--panel2:#271f1b;--ink:#f4ede6;--mut:#b9aca0;--dim:#8a7d72;--line:#3a2f29;
+--y:#f6c21a;--gold:#ffb000;--cyan:#38d6ff;--pink:#ff4fa3;--rust:#d9622b;--ok:#6fdc8c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cyan)}a:hover{color:#8fe8ff}
+.tape{height:10px;background:repeating-linear-gradient(45deg,var(--y) 0 18px,#16110f 18px 36px)}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(20,16,14,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav.top .brand{font-weight:900;letter-spacing:.04em;color:var(--y);text-decoration:none;margin-right:10px;text-transform:uppercase}
+nav.top a.l{color:var(--mut);text-decoration:none;font-size:14px;padding:3px 0;border-bottom:2px solid transparent}
+nav.top a.l:hover{color:var(--ink)}nav.top a.l.on{color:var(--ink);border-color:var(--y)}
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+.narrow{max-width:780px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:.2em 0 .3em;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+h1 .acc{color:var(--y)}
+h2{font-size:28px;margin:56px 0 12px;font-weight:850;border-left:6px solid var(--y);padding-left:12px}
+h3{font-size:19px;margin:28px 0 8px}
+p.lead{font-size:19px;color:var(--mut);max-width:820px}
+.kicker{color:var(--y);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+a.card{display:block;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--y)}
+a.card .t{font-weight:850;font-size:18px;margin:8px 0 4px}a.card .d{color:var(--mut);font-size:14px}
+a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:#000}
+figure{margin:0}figure img,figure video{width:100%;border-radius:10px;display:block;background:#000;border:1px solid var(--line)}figure img{background:#ece6df}
+figcaption{color:var(--dim);font-size:13px;margin-top:6px}
+.prompt{background:#0d0a09;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+.prompt .who{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:4px}
+.prompt.owner{border-left-color:var(--y)}.prompt.owner .who{color:var(--y)}
+.prompt.gen{border-left-color:var(--pink)}.prompt.gen .who{color:var(--pink)}
+.prompt .q{white-space:pre-wrap}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+code{background:#0d0a09;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+pre{background:#0d0a09;border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;white-space:nowrap}
+.lesson{background:linear-gradient(0deg,rgba(246,194,26,.08),rgba(246,194,26,.08)),var(--panel);border:1px solid #5a4a12;border-radius:14px;padding:16px 18px;margin:18px 0}
+.lesson b.h{display:block;color:var(--y);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;margin-bottom:4px}
+.note{color:var(--dim);font-size:14px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+.pill.y{color:#16110f;background:var(--y);border-color:var(--y)}.pill.c{color:var(--cyan);border-color:#1f5b6b}.pill.p{color:var(--pink);border-color:#6b1f45}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .v{font-size:28px;font-weight:900;color:var(--y)}.stat .k{color:var(--mut);font-size:13.5px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.pipe .s{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--y);border-radius:10px;padding:10px 12px}
+.pipe .s b{display:block}.pipe .s span{color:var(--mut);font-size:13px}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:22px}
+.tl .ev{position:relative;margin:0 0 26px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}
+.tl .when{color:var(--y);font-weight:800;font-size:13px;letter-spacing:.06em}
+.beat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+@media(max-width:820px){.beat{grid-template-columns:1fr}}
+.beat .num{font-size:13px;font-weight:900;color:#16110f;background:var(--y);display:inline-block;padding:2px 10px;border-radius:999px}
+.beat h3{margin:8px 0 6px;font-size:24px}
+.beat ul{margin:6px 0 0;padding-left:20px}.beat li{margin:4px 0;font-size:17px}
+.say{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:10px}
+article p{font-size:17.5px;line-height:1.75}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.toc a{display:inline-block;margin:3px 14px 3px 0;color:var(--mut);text-decoration:none;font-size:14.5px}.toc a:hover{color:var(--y)}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:60px;flex-wrap:wrap}
+.pn a{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--y)}
+footer{color:var(--dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:14px}
+audio{width:100%;height:36px}
+</style></head><body>
+<div class="tape"></div><nav class="top"><div class="in"><a class="brand" href="master.html">Scrappy Yard · Build notes</a><a class="l" href="journey.html">Build journey</a><a class="l" href="talking-points.html">Talking points</a><a class="l" href="article.html">Article</a><a class="l" href="mockups.html">Mockups</a><a class="l" href="tripo-animations.html">Tripo + animation</a><a class="l" href="ui.html">UI + menus</a><a class="l" href="audio-elevenlabs.html">ElevenLabs audio</a><a class="l on" href="environment.html">World + chase</a><a class="l" href="gym-to-play.html">Gym → Play → Ship</a><a class="l" href="prompts-tools.html">Prompts + tools</a></div></nav><main class=""><div class="kicker">Learning point 4</div><h1>World, props and <span class="acc">chase</span></h1>
+<p class="lead">The track was playable early. Making it feel like a place took three passes: real hazard props, then a living backdrop, then a mech that performs instead of just following you.</p>
+<h2>Hazard props: fal reference → Tripo → Blender</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 11:00 AM</div><div class="q">in the meantime let&#x27;s actually create assets required for the actual game, including the big mecha.
+we should use image generation to create reference images for each of these items an then use tripo to generate them
+we can use blender for things we can model ourselves</div></div>
+<p>That one message is the asset policy. Things with character (mech, oil barrel, scrap car) got a fal reference image and a Tripo P1 mesh (50 credits each). Things that are simple geometry (the hex nut, the 8 m lane tile) were built straight in Blender, free.</p>
+<div class="grid g2"><figure><img loading="lazy" src="media/assets/prop_hex_nut.jpg" alt="Blender-built hex nut (448 tris, neon emissive)"><figcaption>Blender-built hex nut (448 tris, neon emissive) · <code>share/media/assets/prop_hex_nut.jpg</code></figcaption></figure><figure><img loading="lazy" src="media/assets/env_scrapyard_lane.jpg" alt="Blender-built lane tile with hazard-stripe rails"><figcaption>Blender-built lane tile with hazard-stripe rails · <code>share/media/assets/env_scrapyard_lane.jpg</code></figcaption></figure></div>
+<h2>Making it feel alive</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 4:27 PM</div><div class="q">ok the sides and the envrionment and surroundings are too empty, we should generate enough props and then use blender to make some props too, skybox can be improved to give a sense of a living world. 
+we should have things flying around above  and cross over or something to give depth to the scene</div></div>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · card answer</div><div class="q">Approve ~4 Tripo hero props (~40–80 credits) plus Blender fill</div></div>
+<figure><img loading="lazy" src="media/kickoff/env-dressing-play.png" alt="Play after the dressing pass (4eb675d)"><figcaption>Play after the dressing pass (4eb675d) · <code>share/media/kickoff/env-dressing-play.png</code></figcaption></figure>
+<table><thead><tr><th>Piece</th><th>Source</th><th>Notes</th></tr></thead><tbody><tr><td class="">Crane (landmark)</td><td class="">Tripo text → model, 40 cr</td><td class="">prompt: stylized cartoon rusted orange industrial gantry crane tower with lattice frame and hanging hook, scrapyard, hand-painted game asset, standalone</td></tr><tr><td class="">Scrap plane (flyovers)</td><td class="">Tripo text → model, 40 cr</td><td class="">prompt: stylized cartoon patched-together scrap propeller cargo plane made of rusty sheet metal, side wings, game asset, standalone</td></tr><tr><td class="">Containers, scrap heap</td><td class="">Blender</td><td class="">built instead of the other two Tripo heroes: text → model billed 40 cr each, so 4 would pass the ~80 cap</td></tr><tr><td class="">Tire stacks, sheets, pallets, drums, pipes, fences</td><td class="">Blender script</td><td class="">side fill, 17–72 KB each</td></tr><tr><td class="">Neon billboard</td><td class="">Blender</td><td class="">emissive pink/cyan, replaced box signs</td></tr><tr><td class="">Skyline, clouds</td><td class="">Blender</td><td class="">follow the player, 80–95 m back</td></tr></tbody></table>
+<p>Planes cross every 11 s and 17 s on two routes for depth. Dressing streams in last, after the lane and the raccoon, so it never slows the first frame.</p>
+<p>Credit discipline again: Chong-U approved "~4 heroes (~40–80 credits)". When text → model turned out to bill 40 each, Grok Bot stopped at two (80) and built the rest in Blender instead of overspending.</p>
+<h2>No more boxes</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 6:05 PM</div><div class="q">there&#x27;s still too many placeholder buildings, we need no square or rectangle cubes</div></div>
+<p>Commit <code>8dbd5b8</code> deleted the coloured box "junk walls" and box neon signs, swapped the slab skyline for a non-slab Blender one, and stopped side props from growing in. Only GLB props remain at the sides.</p>
+<h2>The mech performs: intro cutscene and chase pressure</h2>
+<figure><video controls preload="none" poster="media/site-posters/intro.jpg" src="media/trailer/project/assets/footage/intro.mp4"></video><figcaption>Intro: the mech drops, slams and roars (about 3 s, skippable) · <code>share/media/trailer/project/assets/footage/intro.mp4</code></figcaption></figure>
+<ul><li>Play opens with a roughly 3 s mech intro: drop, slam, roar. Any key or tap skips it.</li>
+<li>During the run the mech leans and lunges, and its stomp rate is tied to the gap, so it reads as pursuit rather than walking in place.</li>
+<li>Rules underneath (Rust sim): the mech holds a comfort gap that shrinks from 12 m to 7 m along the course. Every stumble hands it ground. At 1.6 m you are caught.</li></ul>
+<figure><video controls preload="none" poster="media/site-posters/caught.jpg" src="media/trailer/project/assets/footage/caught.mp4"></video><figcaption>Pressure: the mech fills the back of the frame · <code>share/media/trailer/project/assets/footage/caught.mp4</code></figcaption></figure>
+<h2>Parked: terrain and upright planes</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 5, 9:04 AM</div><div class="q">on the side there are a lot of floating props, we need the sides to have terrain/meshes so that it looks proper -yet keeping with the theme.
+The planes are flying sideways.</div></div>
+<div class="grid g2"><figure><img loading="lazy" src="media/sides-fix/before-play-a.png" alt="Before: props stand at y = 0 over the pit, so they float"><figcaption>Before: props stand at y = 0 over the pit, so they float · <code>share/media/sides-fix/before-play-a.png</code></figcaption></figure><figure><img loading="lazy" src="media/sides-fix/after-play-a.png" alt="Work in progress: procedural side terrain"><figcaption>Work in progress: procedural side terrain · <code>share/media/sides-fix/after-play-a.png</code></figcaption></figure></div>
+<p>The diagnosis, from <code>docs/direction/env-dressing.md</code>: the ground plane is the pit at y = −7, so every side prop placed at y = 0 stood over nothing. The fix adds a free, procedural Blender terrain strip (curb with hazard stripe, cliff skirt down to the pit, flat dirt yard, scrap berm) tiled every 8 m, and turns the plane so its nose leads instead of a wing. Also queued: faster run cycle, mech smash FX on barrels and cars, a mech idle, a jump-out chase start, and an exaggerated surge run.</p>
+<p class="note">Parked unshipped as of Nov 5, 9:45 AM HKT.</p>
+<div class="lesson"><b class="h">Takeaways</b><ul><li>One sentence of asset policy (generate what has character, model what is geometry) saves credits all game long.</li><li>Stream the decoration last; the player only needs the lane and the hero to start.</li><li>Placeholders hide problems. Removing the boxes exposed floating props, which led to real terrain.</li><li>Threat is presentation: the same chase rules feel very different with an intro, a lean and a stomp that speeds up.</li></ul></div>
+<h2>Reference prompts for the props</h2>
+<div class="prompt gen"><div class="who">fal prompt · out/fal/prop_oil_barrel/prompt-reference.txt</div><div class="q">Single-object reference image for a 3D game asset pipeline (image-to-3D).
+
+Subject only: ONE upright rusty steel oil drum (55-gallon barrel shape, slightly squat: about as wide as it is tall), standing on its flat bottom. Chipped faded red-orange paint with patches of brown rust and dents, two raised rolling ribs around the middle, a rim at the top and bottom, a closed lid with a small round bung cap. A bold yellow and black diagonal hazard-stripe band wrapped around the upper part of the drum, slightly worn. A small dark oil drip running down one side. Chunky readable silhouette.
+
+Composition: one barrel, centred, full object visible with generous margin, three-quarter view from slightly above (about 20 degrees down) so the lid and side are both visible. Soft even studio lighting, no cast shadows. Plain flat pale studio gray background (#D0D0D0).
+
+Style: stylized low-poly 3D toon game prop render, flat colour with gentle cel shading, bold simple shapes, clean edges. Match the oil barrel from Scrapyard neon direction D (dusk palette, chunky toy look).
+
+Exclusions: no green screen, no chroma key, no spilled oil puddle, no ground plane, no other objects, no second barrel, no text, no labels, no logos, no characters, no background scenery.</div></div>
+<div class="prompt gen"><div class="who">fal prompt · out/fal/prop_scrap_car/prompt-reference.txt</div><div class="q">Single-object reference image for a 3D game asset pipeline (image-to-3D).
+
+Subject only: ONE rusted wrecked compact scrap car from a junkyard, a chunky boxy little hatchback (long, narrow, tall body; about twice as long as it is wide). Faded teal-blue paint mostly eaten by orange-brown rust patches, dented doors and crumpled front bumper, one cracked headlight, empty dark window openings with no glass, flat bald tyres on rusty wheels, a slightly crushed roof. Chunky readable toy-like silhouette, all four wheels on the ground.
+
+Composition: one car, centred, full vehicle visible with generous margin, three-quarter front view from slightly above (about 20 degrees down) so the front, one side and the roof are all visible. Soft even studio lighting, no cast shadows. Plain flat pale studio gray background (#D0D0D0).
+
+Style: stylized low-poly 3D toon game prop render, flat colour with gentle cel shading, bold simple shapes, clean edges. Match the junk cars from Scrapyard neon direction D (dusk palette, chunky toy look).
+
+Exclusions: no green screen, no chroma key, no ground plane, no stacked cars, no other vehicles, no other objects, no driver, no characters, no text, no labels, no licence plate text, no logos, no background scenery.</div></div>
+<div class="pn"><a href="audio-elevenlabs.html">← ElevenLabs audio</a><a href="gym-to-play.html">Gym → Play → Ship →</a></div>
+<footer>Scrappy Yard (working title during the build: Scrapyard Dash) · built by Grok Bot from <code>vgd-wasm-game-template</code> v2.7.0, directed by Chong-U Lim · Nov 3–5, 2026 (HKT). Facts on these pages come from the build chat, <code>docs/</code>, and git history in <code>games/blank-start</code>. Prompts marked "owner" are Chong-U's words as typed.</footer>
+</main></body></html>

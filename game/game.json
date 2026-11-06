@@ -1,0 +1,109 @@
+{
+  "$comment": "This game's identity and build settings; scripts/lib/active-game.mjs validates it and docs/starter.md explains each field. Change id, title and storagePrefix before you ship.",
+  "id": "blank-start",
+  "title": "Scrappy Yard",
+  "storagePrefix": "scrapyard",
+  "version": "0.1.0",
+  "release": {
+    "assets": [
+      "favicon.svg",
+      "wasm/*.wasm",
+      "assets/characters/*.glb",
+      "assets/env/*.glb",
+      "assets/props/*.glb",
+      "assets/audio/*.mp3"
+    ]
+  },
+  "preview": {
+    "models": [
+      {
+        "label": "Raccoon (player)",
+        "url": "assets/characters/char_raccoon_player.glb"
+      },
+      {
+        "label": "Junk mech",
+        "url": "assets/characters/char_junk_mech.glb"
+      },
+      {
+        "label": "Hex nut",
+        "url": "assets/props/prop_hex_nut.glb"
+      },
+      {
+        "label": "Oil barrel",
+        "url": "assets/props/prop_oil_barrel.glb"
+      },
+      {
+        "label": "Scrap car",
+        "url": "assets/props/prop_scrap_car.glb"
+      },
+      {
+        "label": "Scrapyard lane",
+        "url": "assets/env/env_scrapyard_lane.glb"
+      },
+      {
+        "label": "Tire Stack",
+        "url": "assets/env/env_tire_stack.glb"
+      },
+      {
+        "label": "Corrugated Sheets",
+        "url": "assets/env/env_corrugated_sheets.glb"
+      },
+      {
+        "label": "Pallet Stack",
+        "url": "assets/env/env_pallet_stack.glb"
+      },
+      {
+        "label": "Drum Cluster",
+        "url": "assets/env/env_drum_cluster.glb"
+      },
+      {
+        "label": "Scrap Pipes",
+        "url": "assets/env/env_scrap_pipes.glb"
+      },
+      {
+        "label": "Fence Panel",
+        "url": "assets/env/env_fence_panel.glb"
+      },
+      {
+        "label": "Neon Billboard",
+        "url": "assets/env/env_neon_billboard.glb"
+      },
+      {
+        "label": "Side Terrain",
+        "url": "assets/env/env_side_terrain.glb"
+      },
+      {
+        "label": "Container Stack",
+        "url": "assets/env/env_container_stack.glb"
+      },
+      {
+        "label": "Scrap Heap",
+        "url": "assets/env/env_scrap_heap.glb"
+      },
+      {
+        "label": "Skyline",
+        "url": "assets/env/env_skyline.glb"
+      },
+      {
+        "label": "Clouds",
+        "url": "assets/env/env_clouds.glb"
+      },
+      {
+        "label": "Crane",
+        "url": "assets/env/env_crane.glb"
+      },
+      {
+        "label": "Scrap plane",
+        "url": "assets/props/prop_scrap_plane.glb"
+      }
+    ]
+  },
+  "commands": {},
+  "smoke": "tests/smoke.mjs",
+  "platform": {
+    "wavedash": {
+      "paidContent": true,
+      "p2p": false
+    }
+  }
+}

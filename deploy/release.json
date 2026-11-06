@@ -1,0 +1,34 @@
+{
+  "$comment": "Engine-wide release rules for scripts/lib/package-game.mjs; docs/release.md explains every field and check. The web root (<gameDir>/public), the public asset allowlist (release.assets) and the identity come from the active game's game.json. Preflight runs the unit tests before every package; requireSmoke makes deploy:web and wavedash:push refuse a source without a passing npm run smoke (preflight cannot run smoke: smoke packages).",
+  "entry": "index.html",
+  "maxFileBytes": 26214400,
+  "devMarker": "vgd:dev-only",
+  "sourcePaths": ["src", "index.html", "crates", "Cargo.toml", "Cargo.lock", "vite.config.ts", "package.json", "package-lock.json", "tsconfig.json", "game.config.json", "deploy/release.json", "convex"],
+  "preflight": [
+    { "name": "typecheck", "run": ["npm", "run", "typecheck"], "why": "a release compiles: engine, game and add-ons" },
+    { "name": "unit tests", "run": ["npm", "run", "test:game"], "why": "the engine's and the active game's Vitest suites, against this source's sim.wasm" },
+    { "name": "rust tests", "run": ["npm", "test"], "why": "the sims' rules (cargo test --workspace)" }
+  ],
+  "requireSmoke": true,
+  "prebuild": [
+    { "name": "wasm", "run": ["node", "scripts/build-wasm.mjs"] }
+  ],
+  "forbidden": [],
+  "targets": {
+    "web": {
+      "env": { "VITE_PLATFORM": "web", "VITE_PLATFORM_ADS": "", "VITE_CONVEX_URL": "https://rugged-hedgehog-932.convex.cloud" },
+      "vercel": true,
+      "forbidden": ["sdk.crazygames.com", "updateLoadProgressZeroToOne"]
+    },
+    "wavedash": {
+      "env": { "VITE_PLATFORM": "wavedash", "VITE_PLATFORM_ADS": "", "VITE_CONVEX_URL": "https://rugged-hedgehog-932.convex.cloud" },
+      "publicUrl": null,
+      "forbidden": ["sdk.crazygames.com"]
+    },
+    "crazygames": {
+      "env": { "VITE_PLATFORM": "crazygames", "VITE_PLATFORM_ADS": "" },
+      "zip": true,
+      "forbidden": ["updateLoadProgressZeroToOne", "requestFullscreen"]
+    }
+  }
+}

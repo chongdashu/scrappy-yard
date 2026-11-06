@@ -1,0 +1,28 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    .v-word { position: absolute; left: 120px; top: 840px; font-family: "Archivo Black", sans-serif; text-transform: uppercase;
+      font-size: 150px; line-height: 0.9; color: #fff; text-shadow: 7px 7px 0 #16110F; white-space: nowrap; }
+    #v-collect { color: #FFB000; }
+    .v-sub { position: absolute; left: 128px; top: 784px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 44px;
+      letter-spacing: 0.04em; text-transform: uppercase; color: #fff; text-shadow: 4px 4px 0 #16110F; }
+  </style>
+  <div id="root" data-composition-id="verbs" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="v-run" class="v-word clip" data-start="0.40" data-duration="2.40" data-track-index="1">Run</div>
+    <div id="v-runsub" class="v-sub clip" data-start="0.70" data-duration="2.10" data-track-index="2">Three lanes. No brakes.</div>
+    <div id="v-collect" class="v-word clip" data-start="4.20" data-duration="2.20" data-track-index="3">Collect</div>
+    <div id="v-collectsub" class="v-sub clip" data-start="4.50" data-duration="1.90" data-track-index="4">Grab every hex nut</div>
+    <div id="v-jump" class="v-word clip" data-start="6.75" data-duration="2.25" data-track-index="5">Jump</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const slam = (sel, at) => tl.fromTo(sel, { scale: 1.35, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out", transformOrigin: "0% 100%" }, at);
+    const blurIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, at);
+    slam("#v-run", 0.40); tl.to("#v-run", { opacity: 0, filter: "blur(8px)", duration: 0.12, ease: "power3.in" }, 2.66);
+    blurIn("#v-runsub", 0.70); tl.to("#v-runsub", { opacity: 0, duration: 0.12, ease: "power3.in" }, 2.66);
+    slam("#v-collect", 4.20); tl.to("#v-collect", { opacity: 0, filter: "blur(8px)", duration: 0.12, ease: "power3.in" }, 6.26);
+    blurIn("#v-collectsub", 4.50); tl.to("#v-collectsub", { opacity: 0, duration: 0.12, ease: "power3.in" }, 6.26);
+    slam("#v-jump", 6.75); tl.to("#v-jump", { opacity: 0, filter: "blur(8px)", duration: 0.12, ease: "power3.in" }, 8.86);
+    window.__timelines["verbs"] = tl;
+  </script>
+</template>

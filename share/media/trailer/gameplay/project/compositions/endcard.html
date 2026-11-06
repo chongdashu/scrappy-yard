@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #e-panel { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: #F6C21A; }
+    .e-tape { position: absolute; left: -120px; width: 2160px; height: 64px;
+      background: repeating-linear-gradient(45deg, #16110F 0 32px, #F6C21A 32px 64px); }
+    #e-tape-top { top: 70px; }
+    #e-tape-bot { top: 946px; }
+    #e-mark { position: absolute; left: 150px; top: 250px; font-family: "Archivo Black", sans-serif; text-transform: uppercase;
+      color: #16110F; line-height: 0.86; white-space: nowrap; }
+    #e-l1 { font-size: 190px; display: block; }
+    #e-l2 { font-size: 250px; display: block; }
+    .e-ch { display: inline-block; }
+    #e-verbs { position: absolute; left: 160px; top: 690px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 56px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #16110F; }
+    #e-cta { position: absolute; left: 150px; top: 790px; background: #16110F; color: #F6C21A; padding: 22px 34px 24px;
+      font-family: "Archivo Black", sans-serif; font-size: 46px; text-transform: uppercase; letter-spacing: 0.01em; }
+    #e-url { position: absolute; left: 980px; top: 806px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 54px; color: #16110F; letter-spacing: 0.01em; }
+  </style>
+  <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="e-panel" class="clip" data-start="0" data-duration="6.4" data-track-index="1">
+      <div id="e-tape-top" class="e-tape"></div>
+      <div id="e-tape-bot" class="e-tape"></div>
+      <div id="e-mark">
+        <span id="e-l1"><span class="e-ch">S</span><span class="e-ch">C</span><span class="e-ch">R</span><span class="e-ch">A</span><span class="e-ch">P</span><span class="e-ch">P</span><span class="e-ch">Y</span></span>
+        <span id="e-l2"><span class="e-ch">Y</span><span class="e-ch">A</span><span class="e-ch">R</span><span class="e-ch">D</span></span>
+      </div>
+      <div id="e-verbs">Run · Jump · Collect · Don't get caught</div>
+      <div id="e-cta">Play on Wavedash</div>
+      <div id="e-url">wavedash.com/games/scrappy-yard</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Tape wipe in: the yellow panel enters from the right edge as a hard diagonal.
+    tl.fromTo("#e-panel", { clipPath: "polygon(100% 0%, 120% 0%, 120% 100%, 100% 100%)" }, { clipPath: "polygon(-20% 0%, 120% 0%, 120% 100%, -20% 100%)", duration: 0.5, ease: "power3.inOut" }, 0);
+    tl.fromTo("#e-tape-top", { x: 0 }, { x: -64, duration: 0.5, ease: "power3.out" }, 0.1);
+    tl.fromTo("#e-tape-bot", { x: -64 }, { x: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+    // Wordmark stamped letter by letter.
+    tl.fromTo("#e-mark .e-ch", { scale: 1.6, opacity: 0, y: -30 }, { scale: 1, opacity: 1, y: 0, duration: 0.18, ease: "expo.out", stagger: 0.045, transformOrigin: "50% 100%" }, 0.45);
+    tl.fromTo("#e-verbs", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 1.4);
+    tl.fromTo("#e-cta", { scaleX: 0.2, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.3, ease: "expo.out", transformOrigin: "0% 50%" }, 2.0);
+    tl.fromTo("#e-url", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 2.4);
+    window.__timelines["endcard"] = tl;
+  </script>
+</template>

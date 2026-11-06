@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gym → Play → Ship · Scrappy Yard build notes</title><style>
+:root{--bg:#14100e;--panel:#1e1815;--panel2:#271f1b;--ink:#f4ede6;--mut:#b9aca0;--dim:#8a7d72;--line:#3a2f29;
+--y:#f6c21a;--gold:#ffb000;--cyan:#38d6ff;--pink:#ff4fa3;--rust:#d9622b;--ok:#6fdc8c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cyan)}a:hover{color:#8fe8ff}
+.tape{height:10px;background:repeating-linear-gradient(45deg,var(--y) 0 18px,#16110f 18px 36px)}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(20,16,14,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav.top .brand{font-weight:900;letter-spacing:.04em;color:var(--y);text-decoration:none;margin-right:10px;text-transform:uppercase}
+nav.top a.l{color:var(--mut);text-decoration:none;font-size:14px;padding:3px 0;border-bottom:2px solid transparent}
+nav.top a.l:hover{color:var(--ink)}nav.top a.l.on{color:var(--ink);border-color:var(--y)}
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+.narrow{max-width:780px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:.2em 0 .3em;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+h1 .acc{color:var(--y)}
+h2{font-size:28px;margin:56px 0 12px;font-weight:850;border-left:6px solid var(--y);padding-left:12px}
+h3{font-size:19px;margin:28px 0 8px}
+p.lead{font-size:19px;color:var(--mut);max-width:820px}
+.kicker{color:var(--y);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+a.card{display:block;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--y)}
+a.card .t{font-weight:850;font-size:18px;margin:8px 0 4px}a.card .d{color:var(--mut);font-size:14px}
+a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:#000}
+figure{margin:0}figure img,figure video{width:100%;border-radius:10px;display:block;background:#000;border:1px solid var(--line)}figure img{background:#ece6df}
+figcaption{color:var(--dim);font-size:13px;margin-top:6px}
+.prompt{background:#0d0a09;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+.prompt .who{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:4px}
+.prompt.owner{border-left-color:var(--y)}.prompt.owner .who{color:var(--y)}
+.prompt.gen{border-left-color:var(--pink)}.prompt.gen .who{color:var(--pink)}
+.prompt .q{white-space:pre-wrap}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+code{background:#0d0a09;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+pre{background:#0d0a09;border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;white-space:nowrap}
+.lesson{background:linear-gradient(0deg,rgba(246,194,26,.08),rgba(246,194,26,.08)),var(--panel);border:1px solid #5a4a12;border-radius:14px;padding:16px 18px;margin:18px 0}
+.lesson b.h{display:block;color:var(--y);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;margin-bottom:4px}
+.note{color:var(--dim);font-size:14px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+.pill.y{color:#16110f;background:var(--y);border-color:var(--y)}.pill.c{color:var(--cyan);border-color:#1f5b6b}.pill.p{color:var(--pink);border-color:#6b1f45}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .v{font-size:28px;font-weight:900;color:var(--y)}.stat .k{color:var(--mut);font-size:13.5px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.pipe .s{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--y);border-radius:10px;padding:10px 12px}
+.pipe .s b{display:block}.pipe .s span{color:var(--mut);font-size:13px}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:22px}
+.tl .ev{position:relative;margin:0 0 26px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}
+.tl .when{color:var(--y);font-weight:800;font-size:13px;letter-spacing:.06em}
+.beat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+@media(max-width:820px){.beat{grid-template-columns:1fr}}
+.beat .num{font-size:13px;font-weight:900;color:#16110f;background:var(--y);display:inline-block;padding:2px 10px;border-radius:999px}
+.beat h3{margin:8px 0 6px;font-size:24px}
+.beat ul{margin:6px 0 0;padding-left:20px}.beat li{margin:4px 0;font-size:17px}
+.say{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:10px}
+article p{font-size:17.5px;line-height:1.75}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.toc a{display:inline-block;margin:3px 14px 3px 0;color:var(--mut);text-decoration:none;font-size:14.5px}.toc a:hover{color:var(--y)}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:60px;flex-wrap:wrap}
+.pn a{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--y)}
+footer{color:var(--dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:14px}
+audio{width:100%;height:36px}
+</style></head><body>
+<div class="tape"></div><nav class="top"><div class="in"><a class="brand" href="master.html">Scrappy Yard · Build notes</a><a class="l" href="journey.html">Build journey</a><a class="l" href="talking-points.html">Talking points</a><a class="l" href="article.html">Article</a><a class="l" href="mockups.html">Mockups</a><a class="l" href="tripo-animations.html">Tripo + animation</a><a class="l" href="ui.html">UI + menus</a><a class="l" href="audio-elevenlabs.html">ElevenLabs audio</a><a class="l" href="environment.html">World + chase</a><a class="l on" href="gym-to-play.html">Gym → Play → Ship</a><a class="l" href="prompts-tools.html">Prompts + tools</a></div></nav><main class=""><div class="kicker">Learning point 5</div><h1>Gym → Play → <span class="acc">Ship</span></h1>
+<p class="lead">The order that kept this build calm: prove the rules in a greybox, swap in real assets without touching the rules, playtest on a private link, then publish only when the release checks pass.</p>
+<h2>Start from a checked template</h2>
+<p>Before any game work, Grok Bot pinned <code>vgd-wasm-game-template</code> at v2.7.0 and ran its own quickstart from that checkout: README vs GETTING-STARTED, 29 markdown links, all 16 skills' frontmatter, the four prompt templates (premise, mockups, kickoff, slice) and a smoke run. Then the quickstart clone path made <code>games/blank-start</code> with commit <code>843eace</code>.</p>
+<h2>Greybox gym: rules before art</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · card answer, Nov 3</div><div class="q">What should the greybox gym de-risk first? Oncoming cam + lane dodge + jump + collect + chase pressure</div></div>
+<figure><video controls preload="none" poster="media/site-posters/gym-broll.jpg" src="media/kickoff/broll/gym-broll.webm"></video><figcaption>Gym b-roll: placeholder shapes, real rules · <code>share/media/kickoff/broll/gym-broll.webm</code></figcaption></figure>
+<p>Commit <code>3c52811</code>, zero credits. Three lanes, 8 m/s toward the camera, 420 m to the finish (about 53 s). Barrels stumble you, scrap cars and gaps end the run, the mech closes in on every slowdown. The rules live in the Rust sim (<code>game/crate/src/params.rs</code>, <code>world.rs</code>), so assets later only change how things look.</p>
+<p>Handy URL flags from <code>docs/direction/kickoff-gym.md</code>: <code>?scene=gym</code>, <code>?scene=viewer</code>, <code>&practice</code> (nothing is lethal), <code>&bounds</code>, <code>&seed=7</code>.</p>
+<div class="grid g4"><figure><img loading="lazy" src="media/kickoff/broll/desk-01.png" alt="Gym b-roll still 1"><figcaption>Gym b-roll still 1 · <code>share/media/kickoff/broll/desk-01.png</code></figcaption></figure><figure><img loading="lazy" src="media/kickoff/broll/desk-02.png" alt="still 2"><figcaption>still 2 · <code>share/media/kickoff/broll/desk-02.png</code></figcaption></figure><figure><img loading="lazy" src="media/kickoff/broll/desk-03.png" alt="still 3"><figcaption>still 3 · <code>share/media/kickoff/broll/desk-03.png</code></figcaption></figure><figure><img loading="lazy" src="media/kickoff/broll/desk-04.png" alt="still 4"><figcaption>still 4 · <code>share/media/kickoff/broll/desk-04.png</code></figcaption></figure></div>
+<h2>Playtesting from a laptop over Tailscale</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 7:41 AM</div><div class="q">because you are on a box - can you take screenshots + videos?
+wondering if you can install tailscale too so i can connect to you to play the game on &#x27;localhost&#x27; ?</div></div>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · 8:21 AM</div><div class="q">approved -- not sure what is a tailnet</div></div>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · 9:52 AM</div><div class="q">I can&#x27;t Tailscale from my phone , but i can from my MacBook</div></div>
+<p>Grok Bot installed Tailscale on its box and bound the Vite dev server to the box's tailnet address, not to the public internet. Chong-U approved the box on his tailnet and played the dev build from his MacBook while the bot kept working. The first playtest found a real bug right away (menu entries not clickable, fixed in <code>3426639</code>).</p>
+<p class="note">The tailnet address is private to Chong-U's devices and isn't a public link.</p>
+<h2>Play: same rules, real assets</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 11:00 AM</div><div class="q">ok let&#x27;s now let&#x27;s hav eplay go into an actual game scene</div></div>
+<p>Play drew the rigged raccoon (<code>7fca476</code>), then the mech, barrel, scrap car, hex nut and lane tile (<code>5f866ca</code>). Then came feel fixes from playtest notes:</p>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · 11:33 AM</div><div class="q">the sides are popping in
+can we make it less fixed 3 lane, and allow freedom of movement left and right, but obviously still keep the key collisions lane based</div></div>
+<ul><li>Free strafe: hold to slide at 6.5 m/s, release to stop. Hazards, nuts and gaps stay in three lanes, and a hazard hits anywhere in its lane corridor (<code>269d005</code>, <code>cb688e1</code>).</li>
+<li>Pop-in: side scenery laid out from 100 m back into the haze, so it never appears at the player's depth.</li></ul>
+<figure><video controls preload="none" poster="media/site-posters/dodge.jpg" src="media/trailer/project/assets/footage/dodge.mp4"></video><figcaption>Continuous strafe through lane hazards · <code>share/media/trailer/project/assets/footage/dodge.mp4</code></figcaption></figure>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · 12:18 PM</div><div class="q">Loading is very slow on mobile are we optimising lazy loading at least to first screen? And i got a message saying assets are not in production?</div></div>
+<p>Fix <code>ac2b3d1</code>: Play used to wait for about 15 MB of GLBs, and the release allowlist left the models out, so packaged builds 404'd them. Now the game boots once the 3.9 MB raccoon is ready and streams lane → nut → barrel → car → mech, with placeholders hot-swapped as each lands.</p>
+<h2>Ship to the web</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 2:13 PM</div><div class="q">ok can you deploy the production game on vercel so it&#x27;s available on the web? cheers</div></div>
+<p>The template's release script refuses to deploy without a passing smoke test. The smoke still checked the old lane snap, so Grok Bot updated it to measure X movement while holding keys (<code>ddf60c9</code>, <code>4708ba8</code>), passed on desktop and phone under WebGPU and WebGL2, then deployed through the Vercel connector.</p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td class="">URL</td><td class=""><a href="https://scrapyard-dash.vercel.app/">scrapyard-dash.vercel.app</a></td></tr><tr><td class="">Source commit</td><td class=""><code>4708ba8</code> (clean tree)</td></tr><tr><td class="">Deployed</td><td class="">Nov 4, 2:51 PM HKT</td></tr><tr><td class="">Runtime</td><td class="">16 files, about 15.7 MB</td></tr><tr><td class="">Receipt</td><td class=""><code>deploy/web/deployment.json</code> (<code>3322688</code>)</td></tr></tbody></table>
+<h2>Trailer with HyperFrames</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 6:36 PM</div><div class="q">ok install hyperframes and make a trailer of the game</div></div>
+<figure><video controls preload="none" poster="media/site-posters/trailer.jpg" src="media/trailer/scrapyard-dash-trailer.mp4"></video><figcaption>36 s, 1920×1080, 30 fps · <code>share/media/trailer/scrapyard-dash-trailer.mp4</code></figcaption></figure>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 5, 2:41 PM</div><div class="q">can you prepare more b roll and a trailer showing gameplay mainly</div></div>
+<figure><video controls preload="none" poster="media/site-posters/scrappy-trailer.jpg" src="media/trailer/scrappy-yard-gameplay-trailer.mp4"></video><figcaption>Gameplay-first recut, 40 s, Scrappy Yard titles (project: share/media/trailer/gameplay/project/) · <code>share/media/trailer/scrappy-yard-gameplay-trailer.mp4</code></figcaption></figure>
+<p>From <code>share/media/trailer/project/SPEC.md</code>: hazard-signage type over real headless gameplay capture (HUD hidden), cut on the beat of the game's own 150 BPM chase track. Shots: mech drop hook → SCRAPYARD / DASH title → RUN / JUMP / COLLECT on real events → escalating montage → DON'T GET CAUGHT → a real crash and results card → end card with the play URL. The spec bans glow, gradients, glass cards and invented UI; every object on screen comes from real footage.</p>
+<div class="grid g3"><figure><video controls preload="none" poster="media/site-posters/wide.jpg" src="media/trailer/project/assets/footage/wide.mp4"></video><figcaption>Footage: wide · <code>share/media/trailer/project/assets/footage/wide.mp4</code></figcaption></figure><figure><video controls preload="none" poster="media/site-posters/nuts.jpg" src="media/trailer/project/assets/footage/nuts.mp4"></video><figcaption>Footage: nuts · <code>share/media/trailer/project/assets/footage/nuts.mp4</code></figcaption></figure><figure><video controls preload="none" poster="media/site-posters/crash.jpg" src="media/trailer/project/assets/footage/crash.mp4"></video><figcaption>Footage: crash · <code>share/media/trailer/project/assets/footage/crash.mp4</code></figcaption></figure></div>
+<div class="lesson"><b class="h">Takeaways</b><ul><li>Greybox first: by the time art arrived, the rules were already fun-tested.</li><li>A private playtest link lets the director play the real build while the builder keeps going.</li><li>Let release checks block you. The stale smoke test caught that the game's controls had changed.</li><li>Capture b-roll as you go; the trailer was cut from footage the bot could record any time.</li></ul></div>
+<div class="pn"><a href="environment.html">← World + chase</a><a href="prompts-tools.html">Prompts + tools →</a></div>
+<footer>Scrappy Yard (working title during the build: Scrapyard Dash) · built by Grok Bot from <code>vgd-wasm-game-template</code> v2.7.0, directed by Chong-U Lim · Nov 3–5, 2026 (HKT). Facts on these pages come from the build chat, <code>docs/</code>, and git history in <code>games/blank-start</code>. Prompts marked "owner" are Chong-U's words as typed.</footer>
+</main></body></html>

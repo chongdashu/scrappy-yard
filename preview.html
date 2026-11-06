@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Model preview</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <canvas id="view" aria-label="Model preview viewport"></canvas>
+    <div id="hud">
+      <div id="title"><b>Model preview</b><span id="fps"></span></div>
+      <div id="info"></div>
+      <div id="error" hidden></div>
+    </div>
+    <button id="panel-toggle" aria-expanded="true" aria-controls="panel">Controls</button>
+    <aside id="panel"></aside>
+    <script type="module" src="/src/preview/main.ts"></script>
+  </body>
+</html>

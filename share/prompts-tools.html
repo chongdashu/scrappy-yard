@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Key prompts &amp; tools · Scrappy Yard build notes</title><style>
+:root{--bg:#14100e;--panel:#1e1815;--panel2:#271f1b;--ink:#f4ede6;--mut:#b9aca0;--dim:#8a7d72;--line:#3a2f29;
+--y:#f6c21a;--gold:#ffb000;--cyan:#38d6ff;--pink:#ff4fa3;--rust:#d9622b;--ok:#6fdc8c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cyan)}a:hover{color:#8fe8ff}
+.tape{height:10px;background:repeating-linear-gradient(45deg,var(--y) 0 18px,#16110f 18px 36px)}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(20,16,14,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav.top .brand{font-weight:900;letter-spacing:.04em;color:var(--y);text-decoration:none;margin-right:10px;text-transform:uppercase}
+nav.top a.l{color:var(--mut);text-decoration:none;font-size:14px;padding:3px 0;border-bottom:2px solid transparent}
+nav.top a.l:hover{color:var(--ink)}nav.top a.l.on{color:var(--ink);border-color:var(--y)}
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+.narrow{max-width:780px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:.2em 0 .3em;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+h1 .acc{color:var(--y)}
+h2{font-size:28px;margin:56px 0 12px;font-weight:850;border-left:6px solid var(--y);padding-left:12px}
+h3{font-size:19px;margin:28px 0 8px}
+p.lead{font-size:19px;color:var(--mut);max-width:820px}
+.kicker{color:var(--y);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+a.card{display:block;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--y)}
+a.card .t{font-weight:850;font-size:18px;margin:8px 0 4px}a.card .d{color:var(--mut);font-size:14px}
+a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:#000}
+figure{margin:0}figure img,figure video{width:100%;border-radius:10px;display:block;background:#000;border:1px solid var(--line)}figure img{background:#ece6df}
+figcaption{color:var(--dim);font-size:13px;margin-top:6px}
+.prompt{background:#0d0a09;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+.prompt .who{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:4px}
+.prompt.owner{border-left-color:var(--y)}.prompt.owner .who{color:var(--y)}
+.prompt.gen{border-left-color:var(--pink)}.prompt.gen .who{color:var(--pink)}
+.prompt .q{white-space:pre-wrap}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+code{background:#0d0a09;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+pre{background:#0d0a09;border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;white-space:nowrap}
+.lesson{background:linear-gradient(0deg,rgba(246,194,26,.08),rgba(246,194,26,.08)),var(--panel);border:1px solid #5a4a12;border-radius:14px;padding:16px 18px;margin:18px 0}
+.lesson b.h{display:block;color:var(--y);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;margin-bottom:4px}
+.note{color:var(--dim);font-size:14px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+.pill.y{color:#16110f;background:var(--y);border-color:var(--y)}.pill.c{color:var(--cyan);border-color:#1f5b6b}.pill.p{color:var(--pink);border-color:#6b1f45}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .v{font-size:28px;font-weight:900;color:var(--y)}.stat .k{color:var(--mut);font-size:13.5px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.pipe .s{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--y);border-radius:10px;padding:10px 12px}
+.pipe .s b{display:block}.pipe .s span{color:var(--mut);font-size:13px}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:22px}
+.tl .ev{position:relative;margin:0 0 26px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}
+.tl .when{color:var(--y);font-weight:800;font-size:13px;letter-spacing:.06em}
+.beat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+@media(max-width:820px){.beat{grid-template-columns:1fr}}
+.beat .num{font-size:13px;font-weight:900;color:#16110f;background:var(--y);display:inline-block;padding:2px 10px;border-radius:999px}
+.beat h3{margin:8px 0 6px;font-size:24px}
+.beat ul{margin:6px 0 0;padding-left:20px}.beat li{margin:4px 0;font-size:17px}
+.say{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:10px}
+article p{font-size:17.5px;line-height:1.75}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.toc a{display:inline-block;margin:3px 14px 3px 0;color:var(--mut);text-decoration:none;font-size:14.5px}.toc a:hover{color:var(--y)}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:60px;flex-wrap:wrap}
+.pn a{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--y)}
+footer{color:var(--dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:14px}
+audio{width:100%;height:36px}
+</style></head><body>
+<div class="tape"></div><nav class="top"><div class="in"><a class="brand" href="master.html">Scrappy Yard · Build notes</a><a class="l" href="journey.html">Build journey</a><a class="l" href="talking-points.html">Talking points</a><a class="l" href="article.html">Article</a><a class="l" href="mockups.html">Mockups</a><a class="l" href="tripo-animations.html">Tripo + animation</a><a class="l" href="ui.html">UI + menus</a><a class="l" href="audio-elevenlabs.html">ElevenLabs audio</a><a class="l" href="environment.html">World + chase</a><a class="l" href="gym-to-play.html">Gym → Play → Ship</a><a class="l on" href="prompts-tools.html">Prompts + tools</a></div></nav><main class=""><div class="kicker">Reference</div><h1>Key prompts &amp; <span class="acc">tools</span></h1>
+<p class="lead">The prompts that did the most work, the tools behind them, and what everything cost. Owner prompts are Chong-U's words as typed. Generator prompts are the files Grok Bot wrote and saved next to each output.</p>
+<h2>Tools used</h2>
+<table><thead><tr><th>Tool</th><th>Used for</th><th>Spend</th></tr></thead><tbody><tr><td class="">vgd-wasm-game-template v2.7.0</td><td class="">Engine, Rust sim → WASM, premise/mockups/kickoff/slice prompt templates, release + smoke scripts</td><td class="">the base for everything</td></tr><tr><td class="">fal · GPT Image 2.5 Flare</td><td class="">4 mockups; turnaround sheets (raccoon, mech); reference images (barrel, car)</td><td class="">about $0.33 total</td></tr><tr><td class="">Tripo (CLI, P1 model)</td><td class="">Multiview → mesh; text → model (crane, plane); <code>anim check</code> / <code>rig</code> / <code>retarget</code></td><td class="">390 credits</td></tr><tr><td class="">Blender 5.2.3 LTS</td><td class="">Rerunnable normalise scripts; hex nut, lane tile, side fill, skyline, clouds, terrain</td><td class="">free</td></tr><tr><td class="">ElevenLabs</td><td class=""><code>music_v2</code> menu + chase themes; <code>eleven_text_to_sound_v2</code> 15 SFX</td><td class="">not recorded</td></tr><tr><td class="">HyperFrames</td><td class="">36 s trailer from captured footage + game audio</td><td class="">not recorded</td></tr><tr><td class="">Tailscale</td><td class="">Private playtest of the dev server from Chong-U's MacBook</td><td class="">free</td></tr><tr><td class="">Vercel</td><td class="">Production web deploy via the Vercel connector</td><td class="">not recorded</td></tr><tr><td class="">Box desktop + ffmpeg</td><td class="">Screenshots, b-roll, before/after captures</td><td class="">free</td></tr></tbody></table>
+<h2>Owner prompts that steered the build</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · premise card</div><div class="q">Crash bandicoot x Mario 3d x Spyro style runner , running toward camera, mech in the background chasing you</div></div><p class="note" style="margin-top:-4px">Why it works: Sets genre, camera and threat in one line.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · mockup pick</div><div class="q">D — Scrapyard neon</div></div><p class="note" style="margin-top:-4px">Why it works: One choice sets palette, hero and props.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · Tripo</div><div class="q">you can autorig and then blender polish yeah
+don&#x27;t overwrite the gym, but you need a character test scene to preview the animations etc.</div></div><p class="note" style="margin-top:-4px">Why it works: Approves the pipeline and asks for a safe preview space.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · asset policy</div><div class="q">we should use image generation to create reference images for each of these items an then use tripo to generate them
+we can use blender for things we can model ourselves</div></div><p class="note" style="margin-top:-4px">Why it works: Generate what has character; model what is geometry.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · feel</div><div class="q">can we make it less fixed 3 lane, and allow freedom of movement left and right, but obviously still keep the key collisions lane based</div></div><p class="note" style="margin-top:-4px">Why it works: Changes feel, keeps the rules readable.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · ElevenLabs</div><div class="q">you should do all bgm for the main menu, the main game, and sfx for the game and menu</div></div><p class="note" style="margin-top:-4px">Why it works: A complete audio scope in one sentence.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · UI</div><div class="q">let&#x27;s redo the main menu to be more game like, look entirely different
+splash screen to menu should not have the current transition
+change sounds
+and when crashing i want a different sound than the clown sound</div></div><p class="note" style="margin-top:-4px">Why it works: Four concrete asks, all testable.</p><div class="prompt owner"><div class="who">Chong-U (owner prompt) · marketing</div><div class="q">ok install hyperframes and make a trailer of the game</div></div><p class="note" style="margin-top:-4px">Why it works: Install the tool and ship the thing in one ask.</p>
+<h2>Generator prompt patterns</h2>
+<p>Every image-to-3D reference prompt Grok Bot wrote follows the same shape. Full texts are on the <a href="tripo-animations.html">Tripo</a> and <a href="environment.html">World</a> pages.</p>
+<table><thead><tr><th>Part</th><th>What it says (from the saved prompts)</th></tr></thead><tbody><tr><td class="">Purpose line</td><td class="">"Character turnaround reference sheet for a 3D game asset pipeline (image-to-3D)."</td></tr><tr><td class="">Subject only</td><td class="">ONE object or character, with palette, materials and proportions spelled out</td></tr><tr><td class="">Composition</td><td class="">one row of front / 3/4 / side / back, or a single 3/4 view from about 20° above; wide gaps; whole object in frame</td></tr><tr><td class="">Pose (characters)</td><td class="">A-pose, arms about 45° down, hands empty, legs apart, tail clear of the legs</td></tr><tr><td class="">Backdrop</td><td class="">"Plain flat pale studio gray background (#D0D0D0)"; soft even light, no cast shadows</td></tr><tr><td class="">Style</td><td class="">"stylized low-poly 3D toon game … render, flat colour with gentle cel shading" + "Match … Scrapyard neon direction D"</td></tr><tr><td class="">Exclusions</td><td class="">no green screen, no props in hands, no background, no text, no extra figures</td></tr></tbody></table>
+<p>Tripo text → model prompts were short by comparison, e.g. <code>stylized cartoon rusted orange industrial gantry crane tower with lattice frame and hanging hook, scrapyard, hand-painted game asset, standalone</code>.</p>
+<h2>Spend ledger</h2>
+<table><thead><tr><th>Item</th><th>Tool</th><th>Cost</th></tr></thead><tbody><tr><td class="">Review 1 mockups (4)</td><td class="">fal</td><td class="n">$0.154</td></tr><tr><td class="">Raccoon turnaround</td><td class="">fal</td><td class="n">$0.0385</td></tr><tr><td class="">Mech turnaround (edit from D crop)</td><td class="">fal</td><td class="n">$0.0471</td></tr><tr><td class="">Barrel reference</td><td class="">fal</td><td class="n">$0.0542</td></tr><tr><td class="">Car reference</td><td class="">fal</td><td class="n">$0.0376</td></tr><tr><td class="">Raccoon mesh</td><td class="">Tripo</td><td class="n">50 cr</td></tr><tr><td class="">Raccoon rig + 4 clips</td><td class="">Tripo</td><td class="n">65 cr</td></tr><tr><td class="">Mech, barrel, car meshes</td><td class="">Tripo</td><td class="n">150 cr</td></tr><tr><td class="">Mech rig + idle/walk</td><td class="">Tripo</td><td class="n">45 cr</td></tr><tr><td class="">Crane + scrap plane</td><td class="">Tripo</td><td class="n">80 cr</td></tr></tbody></table>
+<p class="note">fal total about $0.33. Tripo 2600 → 2210 credits as of <code>4eb675d</code>. ElevenLabs, Vercel and HyperFrames costs were not recorded in the repo. Any spend in the parked Nov 5 pass is not included.</p>
+<h2>Where things live in the repo</h2>
+<table><thead><tr><th>Path</th><th>What</th></tr></thead><tbody><tr><td class=""><code>docs/brief.md</code></td><td class="">premise brief + decision log</td></tr><tr><td class=""><code>docs/direction/review-1.md</code></td><td class="">mockups, costs, pick</td></tr><tr><td class=""><code>docs/direction/kickoff-*.md</code></td><td class="">gym and raccoon kickoff notes</td></tr><tr><td class=""><code>docs/asset-contract.md</code></td><td class="">asset sizes, clips, materials, hashes</td></tr><tr><td class=""><code>docs/direction/env-dressing.md</code></td><td class="">world dressing rules</td></tr><tr><td class=""><code>docs/audio/manifest.md</code></td><td class="">audio prompts and triggers</td></tr><tr><td class=""><code>assets/scripts/normalize_*.py</code></td><td class="">Blender polish scripts</td></tr><tr><td class=""><code>assets/source/tripo/</code></td><td class="">untouched Tripo downloads</td></tr><tr><td class=""><code>share/media/</code></td><td class="">screenshots, b-roll, audio masters, trailer</td></tr></tbody></table>
+<div class="pn"><a href="gym-to-play.html">← Gym → Play → Ship</a><a href="master.html">Back to hub ↑</a></div>
+<footer>Scrappy Yard (working title during the build: Scrapyard Dash) · built by Grok Bot from <code>vgd-wasm-game-template</code> v2.7.0, directed by Chong-U Lim · Nov 3–5, 2026 (HKT). Facts on these pages come from the build chat, <code>docs/</code>, and git history in <code>games/blank-start</code>. Prompts marked "owner" are Chong-U's words as typed.</footer>
+</main></body></html>

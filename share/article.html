@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Article · Scrappy Yard build notes</title><style>
+:root{--bg:#14100e;--panel:#1e1815;--panel2:#271f1b;--ink:#f4ede6;--mut:#b9aca0;--dim:#8a7d72;--line:#3a2f29;
+--y:#f6c21a;--gold:#ffb000;--cyan:#38d6ff;--pink:#ff4fa3;--rust:#d9622b;--ok:#6fdc8c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cyan)}a:hover{color:#8fe8ff}
+.tape{height:10px;background:repeating-linear-gradient(45deg,var(--y) 0 18px,#16110f 18px 36px)}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(20,16,14,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav.top .brand{font-weight:900;letter-spacing:.04em;color:var(--y);text-decoration:none;margin-right:10px;text-transform:uppercase}
+nav.top a.l{color:var(--mut);text-decoration:none;font-size:14px;padding:3px 0;border-bottom:2px solid transparent}
+nav.top a.l:hover{color:var(--ink)}nav.top a.l.on{color:var(--ink);border-color:var(--y)}
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+.narrow{max-width:780px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:.2em 0 .3em;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+h1 .acc{color:var(--y)}
+h2{font-size:28px;margin:56px 0 12px;font-weight:850;border-left:6px solid var(--y);padding-left:12px}
+h3{font-size:19px;margin:28px 0 8px}
+p.lead{font-size:19px;color:var(--mut);max-width:820px}
+.kicker{color:var(--y);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+a.card{display:block;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--y)}
+a.card .t{font-weight:850;font-size:18px;margin:8px 0 4px}a.card .d{color:var(--mut);font-size:14px}
+a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:#000}
+figure{margin:0}figure img,figure video{width:100%;border-radius:10px;display:block;background:#000;border:1px solid var(--line)}figure img{background:#ece6df}
+figcaption{color:var(--dim);font-size:13px;margin-top:6px}
+.prompt{background:#0d0a09;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+.prompt .who{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:4px}
+.prompt.owner{border-left-color:var(--y)}.prompt.owner .who{color:var(--y)}
+.prompt.gen{border-left-color:var(--pink)}.prompt.gen .who{color:var(--pink)}
+.prompt .q{white-space:pre-wrap}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+code{background:#0d0a09;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+pre{background:#0d0a09;border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;white-space:nowrap}
+.lesson{background:linear-gradient(0deg,rgba(246,194,26,.08),rgba(246,194,26,.08)),var(--panel);border:1px solid #5a4a12;border-radius:14px;padding:16px 18px;margin:18px 0}
+.lesson b.h{display:block;color:var(--y);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;margin-bottom:4px}
+.note{color:var(--dim);font-size:14px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+.pill.y{color:#16110f;background:var(--y);border-color:var(--y)}.pill.c{color:var(--cyan);border-color:#1f5b6b}.pill.p{color:var(--pink);border-color:#6b1f45}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .v{font-size:28px;font-weight:900;color:var(--y)}.stat .k{color:var(--mut);font-size:13.5px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.pipe .s{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--y);border-radius:10px;padding:10px 12px}
+.pipe .s b{display:block}.pipe .s span{color:var(--mut);font-size:13px}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:22px}
+.tl .ev{position:relative;margin:0 0 26px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}
+.tl .when{color:var(--y);font-weight:800;font-size:13px;letter-spacing:.06em}
+.beat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+@media(max-width:820px){.beat{grid-template-columns:1fr}}
+.beat .num{font-size:13px;font-weight:900;color:#16110f;background:var(--y);display:inline-block;padding:2px 10px;border-radius:999px}
+.beat h3{margin:8px 0 6px;font-size:24px}
+.beat ul{margin:6px 0 0;padding-left:20px}.beat li{margin:4px 0;font-size:17px}
+.say{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:10px}
+article p{font-size:17.5px;line-height:1.75}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.toc a{display:inline-block;margin:3px 14px 3px 0;color:var(--mut);text-decoration:none;font-size:14.5px}.toc a:hover{color:var(--y)}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:60px;flex-wrap:wrap}
+.pn a{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--y)}
+footer{color:var(--dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:14px}
+audio{width:100%;height:36px}
+</style></head><body>
+<div class="tape"></div><nav class="top"><div class="in"><a class="brand" href="master.html">Scrappy Yard · Build notes</a><a class="l" href="journey.html">Build journey</a><a class="l" href="talking-points.html">Talking points</a><a class="l on" href="article.html">Article</a><a class="l" href="mockups.html">Mockups</a><a class="l" href="tripo-animations.html">Tripo + animation</a><a class="l" href="ui.html">UI + menus</a><a class="l" href="audio-elevenlabs.html">ElevenLabs audio</a><a class="l" href="environment.html">World + chase</a><a class="l" href="gym-to-play.html">Gym → Play → Ship</a><a class="l" href="prompts-tools.html">Prompts + tools</a></div></nav><main class="narrow">
+<div class="kicker">Article · ready to post</div>
+<h1>I directed, Grok Bot built: making <span class="acc">Scrappy Yard</span> from a template</h1>
+<p class="lead">How a 3D endless-style runner went from a starter repo to a public web build in about a day, with every step done through chat.</p>
+<article>
+<figure><img loading="lazy" src="media/menu-redesign/nohelp-menu.png" alt="Scrappy Yard main menu, captured before the rename"><figcaption>Scrappy Yard main menu, captured before the rename · <code>share/media/menu-redesign/nohelp-menu.png</code></figcaption></figure>
+<p>Scrappy Yard is a small 3D runner. You play a raccoon in goggles and a red scarf, sprinting toward the camera down a scrapyard walkway while a patchwork junk mech with a magnet arm stomps after you. Jump the oil barrels, slide around the scrap cars, clear the gaps, grab the glowing hex nuts, and don't let the mech close the gap. It runs in the browser on desktop and phone at <a href="https://scrappy-yard.vercel.app/">scrappy-yard.vercel.app</a>.</p>
+<p>I didn't write the code, model the characters or compose the music. Grok Bot did, on its own Linux box, while I sent short messages from my laptop. This post walks through how that went, which tools did what, and what I'd tell anyone trying the same thing.</p>
+
+<h2>Starting point: a template I trust</h2>
+<p>The game started from <code>vgd-wasm-game-template</code> v2.7.0, a template I maintain for WASM games. It already has the engine, a Rust simulation layer, release packaging, smoke tests, and a set of guided steps: premise, mockups, kickoff, slice. My first message wasn't about the game at all. I asked Grok Bot to get familiar with the template and sanity-check the README, skills and quickstart from the exact tag it would build on. It did, reported that v2.7.0 was "green enough to start a new game from", and created the game folder on Nov 3 at 3:45 PM.</p>
+<p>That choice paid off for the rest of the build. Because the plumbing already worked, almost every message I sent afterward was about how the game looked or felt.</p>
+
+<h2>A premise in one sentence</h2>
+<p>Grok Bot asked me a few questions on cards. My game idea, as typed: "Crash bandicoot x Mario 3d x Spyro style runner , running toward camera, mech in the background chasing you." Desktop and mobile, five-to-ten-minute sessions. Win by finishing the course; lose by hitting a hazard, falling, or getting caught. The core feel: lane dodge, jump and collect under chase pressure. The camera faces the player and the world streams at you. That became the brief.</p>
+
+<h2>Mockups before anything else</h2>
+<div class="grid g2"><figure><img loading="lazy" src="media/review-1/C.png" alt="Option C, the bot&#x27;s pick"><figcaption>Option C, the bot&#x27;s pick · <code>share/media/review-1/C.png</code></figcaption></figure><figure><img loading="lazy" src="media/review-1/D.png" alt="Option D, my pick"><figcaption>Option D, my pick · <code>share/media/review-1/D.png</code></figcaption></figure></div>
+<p>Next, Grok Bot used fal (GPT Image 2.5 Flare) with my key to make four mockups: fake gameplay screenshots of the same moment in four settings. Jungle ruins, crystal canyon, toybox islands, scrapyard neon. All four cost about fifteen cents together. It wrote up the strengths and risks of each and recommended the toybox option for readability and build cost.</p>
+<p>I picked D, the scrapyard. It had the most personality, and the story was right there: you're running through the mech's own backyard. Grok Bot turned D's weak spots into rules for the next stage (raise the contrast between hero and track, simplify the busy sides, keep the hero original) and moved on.</p>
+
+<h2>Greybox first</h2>
+<p>Before generating a single model, Grok Bot built a greybox "gym" with placeholder shapes and the real rules: three lanes, jumping, barrels that make you stumble, cars and gaps that end the run, a mech that closes in whenever you slow down. No credits spent. It also recorded b-roll of the gym so I could see it before I played it.</p>
+<figure><video controls preload="none" poster="media/site-posters/gym-broll.jpg" src="media/kickoff/broll/gym-broll.webm"></video><figcaption>Greybox gym b-roll · <code>share/media/kickoff/broll/gym-broll.webm</code></figcaption></figure>
+<p>In the same message that asked for the b-roll, I flagged the main problem: the camera copied the mockup so closely that you could only see about a metre of track ahead. I wrote that there was "not enough 'heads up' for the player to react". The next version showed about 5.6 m ahead, with a lane radar, lamps and audio pings. Fixing that on grey boxes cost nothing.</p>
+<p>To play the dev build myself, I had Grok Bot install Tailscale on its box. I approved it on my tailnet (and admitted I wasn't sure what a tailnet was), then played from my MacBook while it kept working.</p>
+
+<h2>Characters: fal, then Tripo, then Blender</h2>
+<div class="grid g2"><figure><img loading="lazy" src="media/kickoff/char_raccoon_player-turnaround.png" alt="Raccoon turnaround from fal"><figcaption>Raccoon turnaround from fal · <code>share/media/kickoff/char_raccoon_player-turnaround.png</code></figcaption></figure><figure><img loading="lazy" src="media/kickoff/char_raccoon_player-clips.png" alt="Raccoon clips after Blender polish"><figcaption>Raccoon clips after Blender polish · <code>share/media/kickoff/char_raccoon_player-clips.png</code></figcaption></figure></div>
+<p>For the raccoon, Grok Bot wrote a detailed turnaround prompt for fal: front, three-quarter, side and back views in one row, an A-pose with empty hands, flat gray background, no props. It cropped three views out of the sheet and fed them to Tripo to make a textured mesh. A free Tripo check confirmed the mesh was a riggable biped. Then Tripo auto-rigged it and retargeted idle, run, jump and land animations onto it.</p>
+<p>My instruction there was "you can autorig and then blender polish yeah". The polish is a Blender script that can be rerun at any time. It sets the height to exactly 1.1 m, puts the pivot at the feet, retimes the jump to match the game's airtime, closes the run loop's seam, and makes the goggle lenses glow cyan so the raccoon stands out from the brown track. Grok Bot also built a character test scene to preview the clips on a treadmill without touching the gym.</p>
+<p>The junk mech followed the same path, using a crop of mockup D as its identity reference, and got a stomping walk loop from Tripo. The barrel and scrap car got fal reference images and Tripo meshes too. The hex nut and the track tile were simple enough to model straight in Blender. My one-line policy for that was: "use image generation to create reference images for each of these items an then use tripo to generate them / we can use blender for things we can model ourselves".</p>
+<p>Every paid step waited for a yes from me. When I approved about 65 Tripo credits for the mech's rig, it came back at 45. Across the whole build, Tripo spending came to 390 credits.</p>
+
+<h2>Making it feel good</h2>
+<p>Most of my notes from playtests were one or two lines. "The sides are popping in." "Allow freedom of movement left and right, but obviously still keep the key collisions lane based." "Loading is very slow on mobile." And a death animation on game over, "so that he isn't running on the spot."</p>
+<p>Each turned into a concrete change: scenery that grows out of the haze instead of popping in; continuous strafing where hazards still belong to lanes; a loader that starts as soon as the raccoon is ready and streams everything else in; a game-over pose done in code, since Tripo's clips didn't include a death animation.</p>
+<figure><video controls preload="none" poster="media/site-posters/dodge.jpg" src="media/trailer/project/assets/footage/dodge.mp4"></video><figcaption>Continuous strafe · <code>share/media/trailer/project/assets/footage/dodge.mp4</code></figcaption></figure>
+
+<h2>Shipping, then sound</h2>
+<p>On the afternoon of Nov 4 I asked for a production deploy on Vercel. The template won't deploy without a passing smoke test, and that test still expected the old lane-snap controls, so Grok Bot updated it, got it passing on desktop and phone under WebGPU and WebGL2, and shipped. The game went live at 2:51 PM, a day after the first commit.</p>
+<p>Then audio. I gave Grok Bot an ElevenLabs API key through a secure prompt (never pasted in chat) and asked for "all bgm for the main menu, the main game, and sfx for the game and menu". It wrote a prompt for each sound, for example "Heavy giant robot mech footstep stomp, metallic thud with hydraulic hiss", and wired seventeen files into the game with a synth fallback. The stomp gets louder and faster as the mech closes in, so you hear the threat before you see it.</p>
+
+<h2>A world, an entrance, a menu</h2>
+<figure><img loading="lazy" src="media/kickoff/env-dressing-play.png" alt="Play after the world-dressing pass"><figcaption>Play after the world-dressing pass · <code>share/media/kickoff/env-dressing-play.png</code></figcaption></figure>
+<p>The track looked empty, so I asked for props, a better sky, and "things flying around above". Tripo made a crane and a scrap cargo plane. Blender made tire stacks, pallets, fences, containers, a skyline and clouds. Planes now cross overhead every 11 to 17 seconds. When I said "we need no square or rectangle cubes", the last placeholder boxes went.</p>
+<p>The mech also got an entrance: Play now opens with it dropping from the sky, slamming onto the deck and roaring. During the run it leans and lunges at you.</p>
+<div class="grid g2"><figure><img loading="lazy" src="media/menu-redesign/before-menu.png" alt="Menu before"><figcaption>Menu before · <code>share/media/menu-redesign/before-menu.png</code></figcaption></figure><figure><img loading="lazy" src="media/menu-redesign/nohelp-menu.png" alt="Menu after"><figcaption>Menu after · <code>share/media/menu-redesign/nohelp-menu.png</code></figcaption></figure></div>
+<p>Last came the menu. I asked for something "more game like, look entirely different", no slow transition from the splash, new sounds, and "a different sound than the clown sound" for crashing. The result is hazard tape, riveted steel buttons, and a stamped wordmark (it read SCRAPYARD DASH then; it now reads SCRAPPY YARD) over the live scene, with chunky industrial clicks and a scrap-metal crash. The next morning I cut How to Play from the main menu; it lives on the pause card now.</p>
+
+<h2>A trailer from real footage</h2>
+<p>I asked Grok Bot to "install hyperframes and make a trailer of the game". It captured gameplay headlessly, wrote a shot spec, and cut a 36-second trailer to the game's own chase music, with the jump, pickup and crash sounds landing on the real in-game moments.</p>
+<figure><video controls preload="none" poster="media/site-posters/trailer.jpg" src="media/trailer/scrapyard-dash-trailer.mp4"></video><figcaption>Trailer, cut while the game was still called Scrapyard Dash · <code>share/media/trailer/scrapyard-dash-trailer.mp4</code></figcaption></figure>
+<p>After the rename I asked for "more b roll and a trailer showing gameplay mainly". Grok Bot recaptured the current build from six camera setups (heads-up, high read, mockup D, low chase, a crash, the round start) and cut a 40-second version that is almost all play: one continuous run, wide shots, a beat montage, the mech closing in, a real crash, then the Scrappy Yard end card.</p>
+<figure><video controls preload="none" poster="media/site-posters/scrappy-trailer.jpg" src="media/trailer/scrappy-yard-gameplay-trailer.mp4"></video><figcaption>Gameplay-first Scrappy Yard trailer, 40 s · <code>share/media/trailer/scrappy-yard-gameplay-trailer.mp4</code></figcaption></figure>
+<div class="grid g3"><figure><video autoplay muted loop playsinline preload="metadata" poster="media/trailer/gameplay/broll/sy-run-long.jpg" src="media/trailer/gameplay/broll/sy-run-long.mp4"></video><figcaption>B-roll: long run · <code>share/media/trailer/gameplay/broll/sy-run-long.mp4</code></figcaption></figure><figure><video autoplay muted loop playsinline preload="metadata" poster="media/trailer/gameplay/broll/sy-chase-long.jpg" src="media/trailer/gameplay/broll/sy-chase-long.mp4"></video><figcaption>B-roll: low chase · <code>share/media/trailer/gameplay/broll/sy-chase-long.mp4</code></figcaption></figure><figure><video autoplay muted loop playsinline preload="metadata" poster="media/trailer/gameplay/broll/sy-mockd.jpg" src="media/trailer/gameplay/broll/sy-mockd.mp4"></video><figcaption>B-roll: car dodges · <code>share/media/trailer/gameplay/broll/sy-mockd.mp4</code></figcaption></figure></div>
+
+<p>One more change came at the end: on Nov 5 I renamed the game from Scrapyard Dash to Scrappy Yard.</p>
+<h2>What I'd tell someone trying this</h2>
+<p>Start from a template that already builds, tests and deploys. Every message you send then goes into the game itself.</p>
+<p>Make mockups before assets, and pick with your gut. Then write down what's weak about your pick so it gets fixed later.</p>
+<p>Prove the rules in a greybox. Camera problems are cheap on grey boxes and expensive on finished art.</p>
+<p>Keep notes short and specific. "He looks like he's gliding" is a better brief than a paragraph.</p>
+<p>Make the builder ask before every spend, and keep every prompt saved next to what it produced so anything can be regenerated.</p>
+<p>The build isn't finished. My latest notes are parked for the next pass: proper terrain at the sides, planes that fly nose-first, a faster run cycle, barrels and cars that explode when the mech smashes them, and a mech that bursts out to start the chase. Play the public build at <a href="https://scrappy-yard.vercel.app/">scrappy-yard.vercel.app</a> (alias of the Nov 4 afternoon ship plus later passes that made it into production — audio, world, menu, intro, Scrappy Yard name). See how far you get before it catches you.</p>
+</article>
+<div class="pn"><a href="talking-points.html">← Talking points</a><a href="mockups.html">Mockups →</a></div>
+<footer>Scrappy Yard (working title during the build: Scrapyard Dash) · built by Grok Bot from <code>vgd-wasm-game-template</code> v2.7.0, directed by Chong-U Lim · Nov 3–5, 2026 (HKT). Facts on these pages come from the build chat, <code>docs/</code>, and git history in <code>games/blank-start</code>. Prompts marked "owner" are Chong-U's words as typed.</footer>
+</main></body></html>

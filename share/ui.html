@@ -1,0 +1,111 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UI elements · Scrappy Yard build notes</title><style>
+:root{--bg:#14100e;--panel:#1e1815;--panel2:#271f1b;--ink:#f4ede6;--mut:#b9aca0;--dim:#8a7d72;--line:#3a2f29;
+--y:#f6c21a;--gold:#ffb000;--cyan:#38d6ff;--pink:#ff4fa3;--rust:#d9622b;--ok:#6fdc8c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cyan)}a:hover{color:#8fe8ff}
+.tape{height:10px;background:repeating-linear-gradient(45deg,var(--y) 0 18px,#16110f 18px 36px)}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(20,16,14,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav.top .brand{font-weight:900;letter-spacing:.04em;color:var(--y);text-decoration:none;margin-right:10px;text-transform:uppercase}
+nav.top a.l{color:var(--mut);text-decoration:none;font-size:14px;padding:3px 0;border-bottom:2px solid transparent}
+nav.top a.l:hover{color:var(--ink)}nav.top a.l.on{color:var(--ink);border-color:var(--y)}
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+.narrow{max-width:780px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:.2em 0 .3em;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+h1 .acc{color:var(--y)}
+h2{font-size:28px;margin:56px 0 12px;font-weight:850;border-left:6px solid var(--y);padding-left:12px}
+h3{font-size:19px;margin:28px 0 8px}
+p.lead{font-size:19px;color:var(--mut);max-width:820px}
+.kicker{color:var(--y);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+a.card{display:block;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--y)}
+a.card .t{font-weight:850;font-size:18px;margin:8px 0 4px}a.card .d{color:var(--mut);font-size:14px}
+a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:#000}
+figure{margin:0}figure img,figure video{width:100%;border-radius:10px;display:block;background:#000;border:1px solid var(--line)}figure img{background:#ece6df}
+figcaption{color:var(--dim);font-size:13px;margin-top:6px}
+.prompt{background:#0d0a09;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+.prompt .who{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:4px}
+.prompt.owner{border-left-color:var(--y)}.prompt.owner .who{color:var(--y)}
+.prompt.gen{border-left-color:var(--pink)}.prompt.gen .who{color:var(--pink)}
+.prompt .q{white-space:pre-wrap}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+code{background:#0d0a09;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+pre{background:#0d0a09;border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;white-space:nowrap}
+.lesson{background:linear-gradient(0deg,rgba(246,194,26,.08),rgba(246,194,26,.08)),var(--panel);border:1px solid #5a4a12;border-radius:14px;padding:16px 18px;margin:18px 0}
+.lesson b.h{display:block;color:var(--y);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;margin-bottom:4px}
+.note{color:var(--dim);font-size:14px}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+.pill.y{color:#16110f;background:var(--y);border-color:var(--y)}.pill.c{color:var(--cyan);border-color:#1f5b6b}.pill.p{color:var(--pink);border-color:#6b1f45}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .v{font-size:28px;font-weight:900;color:var(--y)}.stat .k{color:var(--mut);font-size:13.5px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.pipe .s{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--y);border-radius:10px;padding:10px 12px}
+.pipe .s b{display:block}.pipe .s span{color:var(--mut);font-size:13px}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:22px}
+.tl .ev{position:relative;margin:0 0 26px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}
+.tl .when{color:var(--y);font-weight:800;font-size:13px;letter-spacing:.06em}
+.beat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+@media(max-width:820px){.beat{grid-template-columns:1fr}}
+.beat .num{font-size:13px;font-weight:900;color:#16110f;background:var(--y);display:inline-block;padding:2px 10px;border-radius:999px}
+.beat h3{margin:8px 0 6px;font-size:24px}
+.beat ul{margin:6px 0 0;padding-left:20px}.beat li{margin:4px 0;font-size:17px}
+.say{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:10px}
+article p{font-size:17.5px;line-height:1.75}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.toc a{display:inline-block;margin:3px 14px 3px 0;color:var(--mut);text-decoration:none;font-size:14.5px}.toc a:hover{color:var(--y)}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:60px;flex-wrap:wrap}
+.pn a{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--y)}
+footer{color:var(--dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:14px}
+audio{width:100%;height:36px}
+</style></head><body>
+<div class="tape"></div><nav class="top"><div class="in"><a class="brand" href="master.html">Scrappy Yard · Build notes</a><a class="l" href="journey.html">Build journey</a><a class="l" href="talking-points.html">Talking points</a><a class="l" href="article.html">Article</a><a class="l" href="mockups.html">Mockups</a><a class="l" href="tripo-animations.html">Tripo + animation</a><a class="l on" href="ui.html">UI + menus</a><a class="l" href="audio-elevenlabs.html">ElevenLabs audio</a><a class="l" href="environment.html">World + chase</a><a class="l" href="gym-to-play.html">Gym → Play → Ship</a><a class="l" href="prompts-tools.html">Prompts + tools</a></div></nav><main class=""><div class="kicker">Learning point 3</div><h1><span class="acc">UI</span> elements</h1>
+<p class="lead">The UI went through three rounds, each set off by one short note from Chong-U: give the player more warning, make the menu feel like a game, then cut what isn't needed.</p>
+<h2>Round 1 · Heads-up HUD (Nov 4 morning)</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 8:27 AM</div><div class="q">current gym needs work because there&#x27;s not enough &#x27;heads up&#x27; for the player to react to things in front of camera,
+remove the control instructionsat bottom of screen, it occludes</div></div>
+<div class="grid g2"><figure><img loading="lazy" src="media/kickoff/desk-4x3.png" alt="Before: mockup-D camera, control strip along the bottom"><figcaption>Before: mockup-D camera, control strip along the bottom · <code>share/media/kickoff/desk-4x3.png</code></figcaption></figure><figure><img loading="lazy" src="media/kickoff/gym-headsup-desktop.png" alt="After: heads-up camera, lane radar, lane lamps"><figcaption>After: heads-up camera, lane radar, lane lamps · <code>share/media/kickoff/gym-headsup-desktop.png</code></figcaption></figure></div>
+<ul><li>Camera: about 5.6 m of track visible ahead, up from about 1.1 m.</li>
+<li>Lane radar warns 3.5 s ahead (was 2.2 s), plus in-world lane lamps and audio pings.</li>
+<li>The bottom control strip was removed; controls moved to How to Play / Help.</li>
+<li>HUD keeps three numbers: nut count, progress to the finish, and the mech gap, which turns red under 4 m.</li></ul>
+<figure><img loading="lazy" src="media/kickoff/gym-headsup-phone.png" alt="Phone layout of the heads-up pass"><figcaption>Phone layout of the heads-up pass · <code>share/media/kickoff/gym-headsup-phone.png</code></figcaption></figure>
+<h2>Round 2 · A main menu that looks like the game (Nov 4 evening)</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 4, 7:43 PM</div><div class="q">let&#x27;s redo the main menu to be more game like, look entirely different
+splash screen to menu should not have the current transition
+change sounds
+and when crashing i want a different sound than the clown sound</div></div>
+<div class="grid g2"><figure><img loading="lazy" src="media/menu-redesign/before-splash.png" alt="Before: splash"><figcaption>Before: splash · <code>share/media/menu-redesign/before-splash.png</code></figcaption></figure><figure><img loading="lazy" src="media/menu-redesign/after-splash.png" alt="After: splash"><figcaption>After: splash · <code>share/media/menu-redesign/after-splash.png</code></figcaption></figure>
+<figure><img loading="lazy" src="media/menu-redesign/before-menu.png" alt="Before: menu"><figcaption>Before: menu · <code>share/media/menu-redesign/before-menu.png</code></figcaption></figure><figure><img loading="lazy" src="media/menu-redesign/after-menu.png" alt="After: menu"><figcaption>After: menu · <code>share/media/menu-redesign/after-menu.png</code></figcaption></figure></div>
+<p>What changed in <code>987b55b</code>:</p>
+<ul><li>A game-side skin (<code>game/src/menu-skin.ts</code> + <code>style.css</code>): stamped SCRAPYARD / DASH wordmark, hazard tape, riveted steel-plate buttons, scrap-metal popups, a portrait layout.</li>
+<li>Title and menu share one column over the live 3D scene, so the wordmark never moves.</li>
+<li>The splash → menu change is now a hard cut: no logo drop, no entry cascade.</li>
+<li>Menu steps with left/right on keys and gamepad.</li>
+<li>Sounds swapped to match: chunky industrial UI clicks, a scrap-metal crash instead of the cartoon one, an industrial game-over sting with "no trombone", a new menu theme. See <a href="audio-elevenlabs.html">ElevenLabs audio</a>.</li></ul>
+<div class="grid g2"><figure><img loading="lazy" src="media/menu-redesign/before-phone-menu.png" alt="Before: phone menu"><figcaption>Before: phone menu · <code>share/media/menu-redesign/before-phone-menu.png</code></figcaption></figure><figure><img loading="lazy" src="media/menu-redesign/after-phone-menu.png" alt="After: phone menu"><figcaption>After: phone menu · <code>share/media/menu-redesign/after-phone-menu.png</code></figcaption></figure></div>
+<h2>Round 3 · Cut How to Play (Nov 5)</h2>
+<div class="prompt owner"><div class="who">Chong-U (owner prompt) · Nov 5, 9:00 AM</div><div class="q">remove how to play i think it&#x27;s not needed</div></div>
+<div class="grid g2"><figure><img loading="lazy" src="media/menu-redesign/after-menu.png" alt="With How to Play"><figcaption>With How to Play · <code>share/media/menu-redesign/after-menu.png</code></figcaption></figure><figure><img loading="lazy" src="media/menu-redesign/nohelp-menu.png" alt="PLAY + OPTIONS only (f8fa29c)"><figcaption>PLAY + OPTIONS only (f8fa29c) · <code>share/media/menu-redesign/nohelp-menu.png</code></figcaption></figure></div>
+<p>The main menu is now PLAY and OPTIONS. How to Play still lives on the pause card for anyone who wants it, so nothing is lost; it's just off the path to the first run. The small dev-only entries (Greybox gym, Asset viewer, Character test) show only on the dev server.</p>
+<figure><img loading="lazy" src="media/menu-redesign/nohelp-phone-menu.png" alt="Phone menu after the cut"><figcaption>Phone menu after the cut · <code>share/media/menu-redesign/nohelp-phone-menu.png</code></figcaption></figure>
+<h2>Patterns worth stealing</h2>
+<ul><li>Pause card as the home for help. Teach in a place players choose to visit, not on top of the playfield.</li>
+<li>Menu over the live scene. The game sells itself behind the buttons.</li>
+<li>Before/after captures every round (<code>share/media/menu-redesign/</code>) so the owner reviews pictures, not diffs.</li>
+<li>Restyle sound together with visuals: a steel menu with cartoon clicks feels wrong.</li></ul>
+<div class="lesson"><b class="h">Takeaway</b><p>Short, opinionated notes work. "More game like, look entirely different" plus "not the clown sound" was enough brief for a full skin, a transition change and five regenerated sounds, because the bot came back with screenshots for the next note.</p></div>
+<p class="note">Parked, not shipped (as of Nov 5, 9:45 AM HKT): pulling the menu in from the right edge and hiding the mech on the title screen, from Chong-U's 9:07 AM note.</p>
+<div class="pn"><a href="tripo-animations.html">← Tripo + animation</a><a href="audio-elevenlabs.html">ElevenLabs audio →</a></div>
+<footer>Scrappy Yard (working title during the build: Scrapyard Dash) · built by Grok Bot from <code>vgd-wasm-game-template</code> v2.7.0, directed by Chong-U Lim · Nov 3–5, 2026 (HKT). Facts on these pages come from the build chat, <code>docs/</code>, and git history in <code>games/blank-start</code>. Prompts marked "owner" are Chong-U's words as typed.</footer>
+</main></body></html>

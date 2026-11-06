@@ -1,0 +1,13 @@
+Two side-by-side screenshots captured from a cartoony 3D endless-style runner game, both showing exactly the same gameplay moment: on the left a portrait smartphone screen, on the right a 16:9 widescreen desktop screen, sitting on a simple dark grey background. They should read as live gameplay with a HUD, not cover art.
+
+Setting: a friendly scrapyard canyon — the chasing mech's backyard. Rusty orange canyon walls stacked with colourful junk, stacked old cars painted in candy colours, cartoon neon signs glowing pink, green and yellow (simple shapes like arrows and stars, no readable words), a sunset sky with warm orange and purple tones. Still cartoony and upbeat, not grim.
+
+Camera: the camera is in front of the player looking back at them, an oncoming runner view; the player sprints toward the viewer while scrap piles and signs whoosh past. The player is a small spunky cartoon raccoon with goggles and a scarf, clearly readable in the lower-middle of the frame, mid-run in the middle of three lanes.
+
+Behind the player, far in the deep background down the canyon, an enormous goofy patchwork mech built from junk with mismatched eyes and a giant magnet arm lumbers after the player, scrap bouncing off it. The mech is chasing the player from behind; the player is fleeing, not attacking.
+
+Mid-ground: an oil-slick puddle hazard with a toppled barrel in one lane, and a broken gap in the metal walkway to jump. Collectibles: glowing round bolts/nuts pickups floating in a row. Finish: a neon-lit finish gate with a checkered banner near the foreground end of the track.
+
+HUD: small and clean — top-left progress bar to the finish and a timer, top-right bolt icon with count. Phone screen only: a see-through virtual joystick at bottom left and a single jump button at bottom right. Desktop screen: absolutely no touch controls, just a tiny keyboard jump hint.
+
+Rendering style: low-poly 3D, flat colour with toon shading, chunky simplified junk shapes and bold silhouettes that simple Blender low-poly assets could match. Keep the scene uncluttered with clear lanes. Whimsical, comedic, family-friendly; no gore, no horror, no weapons firing, no delivery or courier themes.

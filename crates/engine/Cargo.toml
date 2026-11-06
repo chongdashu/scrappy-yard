@@ -1,0 +1,14 @@
+[package]
+name = "vgd-engine"
+version = "0.1.0"
+edition = "2021"
+description = "Game-neutral simulation engine: fixed-step clock, events, params, drawn-pose interpolation and the C ABI every game's sim.wasm exports"
+publish = false
+
+[lib]
+# An rlib only: a game crate (game/crate, addons/<name>/crate) links it and
+# builds the cdylib. The engine exports nothing itself; export_engine_abi!
+# expands the engine's C functions inside the game crate.
+crate-type = ["rlib"]
+
+[dependencies]

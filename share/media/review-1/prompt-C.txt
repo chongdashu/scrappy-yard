@@ -1,0 +1,13 @@
+Composite of two real-time gameplay screenshots from a bright 3D platform-runner game, showing the identical moment in two screen shapes on a plain charcoal backdrop: a tall portrait mobile phone display on the left and a landscape 16:9 desktop display on the right. These are in-game frames with HUD, not key art.
+
+Setting: sunny floating islands made of toybox platforms. Round grassy islands hovering in a clear blue sky with puffy white clouds, a running track built from big chunky toy building blocks in red, yellow and blue, giant spinning tops and stacked wooden toy rings on the sides, a calm turquoise sea far below.
+
+Camera: oncoming runner camera placed in front of the hero, facing them, so the hero runs toward the viewer and the track rushes past under the camera. The hero is an original character: a small round cheerful bear cub in a green beanie and a yellow hoodie, clearly visible in the lower-middle foreground, mid-stride on the centre of three lanes.
+
+Way back in the deep background, on a distant island behind the hero, a giant clunky toy robot mech made of painted wood with a wind-up key on its back clanks along the track after the hero, toy blocks tumbling behind it. It chases from behind; the hero runs away from it and there is no fighting.
+
+Mid-ground: a gap between two toy-block platforms that needs a jump, and a rolling striped beach ball hazard in one lane. Collectibles: shiny golden stars hovering in a neat line over a free lane. Finish: a tall finish gate made of toy blocks with a checkered banner visible just ahead in the near foreground.
+
+HUD: tidy and small: top-left distance meter and clock, top-right star counter. Phone screen only: faint virtual joystick bottom left and one large jump button bottom right. Desktop screen: no touch buttons whatsoever, just a small "Space" jump key hint.
+
+Art style: low-poly toon-shaded 3D, flat saturated colours, rounded simple toy shapes, crisp readable silhouettes, achievable with simple Blender models. Sparse, uncluttered composition. Whimsical and family-friendly; original characters only.

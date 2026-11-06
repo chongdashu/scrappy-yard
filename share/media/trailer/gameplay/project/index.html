@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #16110F; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #16110F; }
+      .vwrap { position: absolute; inset: 0; transform-origin: 50% 50%; z-index: 1; }
+      .vwrap video { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      .scene { position: absolute; inset: 0; z-index: 5; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="40.0" data-width="1920" data-height="1080">
+      <div id="w-intro" class="vwrap">
+        <video id="v-intro" class="clip" src="assets/footage/sy-intro.mp4" muted playsinline data-start="0.00" data-duration="5.60" data-media-start="0.00" data-track-index="0"></video>
+      </div>
+      <div id="w-run" class="vwrap">
+        <video id="v-run" class="clip" src="assets/footage/sy-run-long.mp4" muted playsinline data-start="5.60" data-duration="7.20" data-media-start="6.60" data-track-index="1"></video>
+      </div>
+      <div id="w-high" class="vwrap">
+        <video id="v-high" class="clip" src="assets/footage/sy-high-long.mp4" muted playsinline data-start="12.80" data-duration="3.20" data-media-start="1.60" data-track-index="0"></video>
+      </div>
+      <div id="w-mockd" class="vwrap">
+        <video id="v-mockd" class="clip" src="assets/footage/sy-mockd.mp4" muted playsinline data-start="16.00" data-duration="3.20" data-media-start="4.00" data-track-index="1"></video>
+      </div>
+      <div id="w-m1" class="vwrap">
+        <video id="v-m1" class="clip" src="assets/footage/sy-run-long.mp4" muted playsinline data-start="19.20" data-duration="0.40" data-media-start="8.00" data-track-index="0"></video>
+      </div>
+      <div id="w-m2" class="vwrap">
+        <video id="v-m2" class="clip" src="assets/footage/sy-fox.mp4" muted playsinline data-start="19.60" data-duration="0.40" data-media-start="2.00" data-track-index="1"></video>
+      </div>
+      <div id="w-m3" class="vwrap">
+        <video id="v-m3" class="clip" src="assets/footage/sy-cat.mp4" muted playsinline data-start="20.00" data-duration="0.40" data-media-start="1.30" data-track-index="0"></video>
+      </div>
+      <div id="w-m4" class="vwrap">
+        <video id="v-m4" class="clip" src="assets/footage/sy-badger.mp4" muted playsinline data-start="20.40" data-duration="0.40" data-media-start="2.40" data-track-index="1"></video>
+      </div>
+      <div id="w-m5" class="vwrap">
+        <video id="v-m5" class="clip" src="assets/footage/sy-possum.mp4" muted playsinline data-start="20.80" data-duration="0.40" data-media-start="2.00" data-track-index="0"></video>
+      </div>
+      <div id="w-m6" class="vwrap">
+        <video id="v-m6" class="clip" src="assets/footage/sy-otter.mp4" muted playsinline data-start="21.20" data-duration="0.40" data-media-start="2.60" data-track-index="1"></video>
+      </div>
+      <div id="w-m7" class="vwrap">
+        <video id="v-m7" class="clip" src="assets/footage/sy-fox.mp4" muted playsinline data-start="21.60" data-duration="0.40" data-media-start="3.50" data-track-index="0"></video>
+      </div>
+      <div id="w-m8" class="vwrap">
+        <video id="v-m8" class="clip" src="assets/footage/sy-cat.mp4" muted playsinline data-start="22.00" data-duration="0.40" data-media-start="3.30" data-track-index="1"></video>
+      </div>
+      <div id="w-press" class="vwrap">
+        <video id="v-press" class="clip" src="assets/footage/sy-chase-long.mp4" muted playsinline data-start="22.40" data-duration="6.40" data-media-start="3.50" data-track-index="0"></video>
+      </div>
+      <div id="w-crash" class="vwrap">
+        <video id="v-crash" class="clip" src="assets/footage/sy-crash.mp4" muted playsinline data-start="28.80" data-duration="4.80" data-media-start="2.20" data-track-index="1"></video>
+      </div>
+      <div id="title" class="scene clip" data-composition-id="title" data-composition-src="compositions/title.html" data-start="3.0" data-duration="2.8" data-track-index="3" data-track-kind="graphics"></div>
+      <div id="verbs" class="scene clip" data-composition-id="verbs" data-composition-src="compositions/verbs.html" data-start="5.6" data-duration="9.0" data-track-index="4" data-track-kind="graphics"></div>
+      <div id="roster" class="scene clip" data-composition-id="roster" data-composition-src="compositions/roster.html" data-start="19.2" data-duration="3.2" data-track-index="5" data-track-kind="graphics"></div>
+      <div id="pressure" class="scene clip" data-composition-id="pressure" data-composition-src="compositions/pressure.html" data-start="22.4" data-duration="6.4" data-track-index="6" data-track-kind="graphics"></div>
+      <div id="endcard" class="scene clip" data-composition-id="endcard" data-composition-src="compositions/endcard.html" data-start="33.6" data-duration="6.4" data-track-index="7" data-track-kind="graphics"></div>
+      <audio id="a-bgm" src="assets/audio/bgm_play.mp3" data-start="0" data-duration="40.0" data-media-start="38.435" data-volume="0.62" data-fade-out="1.6" data-track-index="8"></audio>
+      <audio id="a-stomp-0" src="assets/audio/sfx_stomp.mp3" data-start="0.70" data-duration="0.8" data-volume="1.0" data-track-index="9"></audio>
+      <audio id="a-danger-1" src="assets/audio/sfx_danger.mp3" data-start="1.70" data-duration="0.8" data-volume="0.55" data-track-index="10"></audio>
+      <audio id="a-pickup-2" src="assets/audio/sfx_pickup.mp3" data-start="4.63" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-pickup-3" src="assets/audio/sfx_pickup.mp3" data-start="4.87" data-duration="0.5" data-volume="0.42" data-track-index="9"></audio>
+      <audio id="a-pickup-4" src="assets/audio/sfx_pickup.mp3" data-start="5.13" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-pickup-5" src="assets/audio/sfx_pickup.mp3" data-start="5.37" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-pickup-6" src="assets/audio/sfx_pickup.mp3" data-start="7.83" data-duration="0.5" data-volume="0.42" data-track-index="9"></audio>
+      <audio id="a-pickup-7" src="assets/audio/sfx_pickup.mp3" data-start="8.57" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-pickup-8" src="assets/audio/sfx_pickup.mp3" data-start="9.80" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-pickup-9" src="assets/audio/sfx_pickup.mp3" data-start="10.20" data-duration="0.5" data-volume="0.42" data-track-index="9"></audio>
+      <audio id="a-pickup-10" src="assets/audio/sfx_pickup.mp3" data-start="10.47" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-jump-11" src="assets/audio/sfx_jump.mp3" data-start="12.40" data-duration="0.5" data-volume="0.7" data-track-index="11"></audio>
+      <audio id="a-jump-12" src="assets/audio/sfx_jump.mp3" data-start="13.80" data-duration="0.5" data-volume="0.7" data-track-index="9"></audio>
+      <audio id="a-land-13" src="assets/audio/sfx_land.mp3" data-start="14.40" data-duration="0.5" data-volume="0.5" data-track-index="10"></audio>
+      <audio id="a-pickup-14" src="assets/audio/sfx_pickup.mp3" data-start="16.40" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-pickup-15" src="assets/audio/sfx_pickup.mp3" data-start="16.63" data-duration="0.5" data-volume="0.42" data-track-index="9"></audio>
+      <audio id="a-pickup-16" src="assets/audio/sfx_pickup.mp3" data-start="16.90" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-jump-17" src="assets/audio/sfx_jump.mp3" data-start="18.83" data-duration="0.5" data-volume="0.7" data-track-index="11"></audio>
+      <audio id="a-stomp-18" src="assets/audio/sfx_stomp.mp3" data-start="19.20" data-duration="0.8" data-volume="0.55" data-track-index="9"></audio>
+      <audio id="a-pickup-19" src="assets/audio/sfx_pickup.mp3" data-start="19.73" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-pickup-20" src="assets/audio/sfx_pickup.mp3" data-start="20.93" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-danger-21" src="assets/audio/sfx_danger.mp3" data-start="22.40" data-duration="0.8" data-volume="0.6" data-track-index="9"></audio>
+      <audio id="a-hit-22" src="assets/audio/sfx_hit.mp3" data-start="22.70" data-duration="0.7" data-volume="0.75" data-track-index="10"></audio>
+      <audio id="a-hit-23" src="assets/audio/sfx_hit.mp3" data-start="25.60" data-duration="0.7" data-volume="0.75" data-track-index="11"></audio>
+      <audio id="a-pickup-24" src="assets/audio/sfx_pickup.mp3" data-start="28.17" data-duration="0.5" data-volume="0.42" data-track-index="9"></audio>
+      <audio id="a-pickup-25" src="assets/audio/sfx_pickup.mp3" data-start="28.43" data-duration="0.5" data-volume="0.42" data-track-index="10"></audio>
+      <audio id="a-pickup-26" src="assets/audio/sfx_pickup.mp3" data-start="28.67" data-duration="0.5" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="a-hit-27" src="assets/audio/sfx_hit.mp3" data-start="30.27" data-duration="0.7" data-volume="0.9" data-track-index="9"></audio>
+      <audio id="a-gameover-28" src="assets/audio/sfx_gameover.mp3" data-start="30.35" data-duration="2.5" data-volume="0.85" data-track-index="10"></audio>
+      <audio id="a-ui_start-29" src="assets/audio/sfx_ui_start.mp3" data-start="33.60" data-duration="1.2" data-volume="0.7" data-track-index="11"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.set(["#w-intro", "#w-crash"], { scale: 1 }, 0);
+      tl.to("#w-intro", { scale: 1.12, duration: 0.07, ease: "power4.out" }, 0.68);
+      tl.to("#w-intro", { scale: 1.02, duration: 0.5, ease: "power2.out" }, 0.75);
+      tl.to("#w-crash", { scale: 1.12, duration: 0.07, ease: "power4.out" }, 30.25);
+      tl.to("#w-crash", { scale: 1.02, duration: 0.5, ease: "power2.out" }, 30.32);
+      tl.fromTo("#w-run", { scale: 1 }, { scale: 1.06, duration: 7.20, ease: "none" }, 5.6);
+      tl.fromTo("#w-high", { scale: 1 }, { scale: 1.05, duration: 3.20, ease: "none" }, 12.8);
+      tl.fromTo("#w-mockd", { scale: 1 }, { scale: 1.05, duration: 3.20, ease: "none" }, 16.0);
+      tl.fromTo("#w-press", { scale: 1 }, { scale: 1.14, duration: 6.40, ease: "none" }, 22.4);
+      tl.fromTo("#w-m1", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 19.2);
+      tl.fromTo("#w-m2", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 19.6);
+      tl.fromTo("#w-m3", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 20.0);
+      tl.fromTo("#w-m4", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 20.4);
+      tl.fromTo("#w-m5", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 20.8);
+      tl.fromTo("#w-m6", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 21.2);
+      tl.fromTo("#w-m7", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 21.6);
+      tl.fromTo("#w-m8", { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "power3.out" }, 22.0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

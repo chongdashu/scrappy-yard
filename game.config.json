@@ -1,0 +1,4 @@
+{
+  "$comment": "The active game: the folder the engine builds, serves, packages and tests (its game.json holds the identity). GAME_DIR overrides it for one command, e.g. GAME_DIR=addons/starter-arena npm run dev. See docs/starter.md.",
+  "gameDir": "game"
+}

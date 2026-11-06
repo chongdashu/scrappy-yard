@@ -1,0 +1,15 @@
+[package]
+# Rename with your game's id (game/game.json "id"): package names must be
+# unique across the workspace, which also holds every add-on's crate.
+name = "my-game-sim"
+version = "0.1.0"
+edition = "2021"
+description = "The game's simulation, compiled to WebAssembly on the vgd-engine C ABI"
+publish = false
+
+[lib]
+# cdylib: the wasm module; rlib: native `cargo test` against the same code.
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+vgd-engine = { workspace = true }
